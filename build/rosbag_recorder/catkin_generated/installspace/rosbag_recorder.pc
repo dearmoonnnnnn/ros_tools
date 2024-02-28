@@ -1,0 +1,8 @@
+prefix=/home/dearmoon/projects/rosbag_recorder/install
+
+Name: rosbag_recorder
+Description: Description of rosbag_recorder
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
