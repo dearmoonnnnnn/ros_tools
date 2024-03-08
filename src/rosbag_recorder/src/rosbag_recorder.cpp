@@ -11,6 +11,7 @@ void alCallback(const sensor_msgs::PointCloud::ConstPtr& msg) {
 
     if (bag.isOpen()) {
         bag.write("/ars548_process/detection_point_cloud", msg->header.stamp, *msg);
+        std::cout << "msg->header.stamp : " << msg->header.stamp << std::endl;
     }
 }
 
@@ -19,7 +20,7 @@ int main(int argc, char **argv) {
     ros::NodeHandle nh;
 
     // 打开Bag文件以写入
-    bag.open("/home/dearmoon/datasets/4DRadar/ours/bag/syd.bag", rosbag::bagmode::Write);
+    bag.open("/home/dearmoon/datasets/NWU/日晴半室内低速2/4DRadar/RiQingBanShiNeiDiSu3.bag", rosbag::bagmode::Write);
 
     ros::Subscriber sub = nh.subscribe<sensor_msgs::PointCloud>("/ars548_process/detection_point_cloud", 10, alCallback);
 

@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/dearmoon/projects/rosbag_recorder/install/lib;/home/dearmoon/projects/rosbag_recorder/devel/lib;/home/dearmoon/projects/RosDriverForARS548/devel/lib;/home/dearmoon/projects/calibration/devel/lib;/home/dearmoon/projects/hdl_graph_slam/devel/lib;/home/dearmoon/projects/4DRadarSlam/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/dearmoon/projects/rosbag_recorder/install/lib;/home/dearmoon/projects/RosDriverForARS548/devel/lib;/home/dearmoon/projects/4DRadarSlam/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -211,7 +211,7 @@ foreach(depend ${depends})
   _unpack_libraries_with_build_configuration(rosbag_recorder_LIBRARIES ${rosbag_recorder_LIBRARIES})
 
   _list_append_unique(rosbag_recorder_LIBRARY_DIRS ${${rosbag_recorder_dep}_LIBRARY_DIRS})
-  list(APPEND rosbag_recorder_EXPORTED_TARGETS ${${rosbag_recorder_dep}_EXPORTED_TARGETS})
+  _list_append_deduplicate(rosbag_recorder_EXPORTED_TARGETS ${${rosbag_recorder_dep}_EXPORTED_TARGETS})
 endforeach()
 
 set(pkg_cfg_extras "")
