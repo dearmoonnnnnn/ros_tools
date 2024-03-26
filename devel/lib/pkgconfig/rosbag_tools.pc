@@ -1,0 +1,8 @@
+prefix=/home/dearmoon/projects/rosbag_tools/devel
+
+Name: rosbag_tools
+Description: Description of rosbag_tools
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

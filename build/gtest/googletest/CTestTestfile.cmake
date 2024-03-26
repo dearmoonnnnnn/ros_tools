@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
 # Source directory: /usr/src/googletest/googletest
-# Build directory: /home/dearmoon/projects/rosbag_recorder/build/gtest/googletest
+# Build directory: /home/dearmoon/projects/rosbag_tools/build/gtest/googletest
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.

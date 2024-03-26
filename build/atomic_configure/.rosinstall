@@ -1,2 +1,2 @@
 - setup-file:
-    local-name: /home/dearmoon/projects/rosbag_recorder/devel/setup.sh
+    local-name: /home/dearmoon/projects/rosbag_tools/devel/setup.sh
