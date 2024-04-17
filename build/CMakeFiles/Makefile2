@@ -136,6 +136,7 @@ gtest/googletest/clean: gtest/googletest/CMakeFiles/gtest.dir/clean
 # Directory level rules for directory rosbag_tools
 
 # Recursive "all" directory target.
+rosbag_tools/all: rosbag_tools/CMakeFiles/bag_merging.dir/all
 rosbag_tools/all: rosbag_tools/CMakeFiles/voxel_enhancing.dir/all
 rosbag_tools/all: rosbag_tools/CMakeFiles/bagToPcd.dir/all
 rosbag_tools/all: rosbag_tools/CMakeFiles/rosbag_recorder.dir/all
@@ -148,6 +149,7 @@ rosbag_tools/preinstall:
 .PHONY : rosbag_tools/preinstall
 
 # Recursive "clean" directory target.
+rosbag_tools/clean: rosbag_tools/CMakeFiles/bag_merging.dir/clean
 rosbag_tools/clean: rosbag_tools/CMakeFiles/voxel_enhancing.dir/clean
 rosbag_tools/clean: rosbag_tools/CMakeFiles/bagToPcd.dir/clean
 rosbag_tools/clean: rosbag_tools/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/clean
@@ -375,7 +377,7 @@ gtest/googlemock/CMakeFiles/gmock_main.dir/all: gtest/googlemock/CMakeFiles/gmoc
 gtest/googlemock/CMakeFiles/gmock_main.dir/all: gtest/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/depend
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dearmoon/projects/rosbag_tools/build/CMakeFiles --progress-num=5,6 "Built target gmock_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dearmoon/projects/rosbag_tools/build/CMakeFiles --progress-num=7,8 "Built target gmock_main"
 .PHONY : gtest/googlemock/CMakeFiles/gmock_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -402,7 +404,7 @@ gtest/googlemock/CMakeFiles/gmock_main.dir/clean:
 gtest/googlemock/CMakeFiles/gmock.dir/all: gtest/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock.dir/build.make gtest/googlemock/CMakeFiles/gmock.dir/depend
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock.dir/build.make gtest/googlemock/CMakeFiles/gmock.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dearmoon/projects/rosbag_tools/build/CMakeFiles --progress-num=3,4 "Built target gmock"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dearmoon/projects/rosbag_tools/build/CMakeFiles --progress-num=5,6 "Built target gmock"
 .PHONY : gtest/googlemock/CMakeFiles/gmock.dir/all
 
 # Build rule for subdir invocation for target.
@@ -429,7 +431,7 @@ gtest/googlemock/CMakeFiles/gmock.dir/clean:
 gtest/googletest/CMakeFiles/gtest_main.dir/all: gtest/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest_main.dir/build.make gtest/googletest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest_main.dir/build.make gtest/googletest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dearmoon/projects/rosbag_tools/build/CMakeFiles --progress-num=9,10 "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dearmoon/projects/rosbag_tools/build/CMakeFiles --progress-num=11,12 "Built target gtest_main"
 .PHONY : gtest/googletest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -456,7 +458,7 @@ gtest/googletest/CMakeFiles/gtest_main.dir/clean:
 gtest/googletest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest.dir/build.make gtest/googletest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest.dir/build.make gtest/googletest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dearmoon/projects/rosbag_tools/build/CMakeFiles --progress-num=7,8 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dearmoon/projects/rosbag_tools/build/CMakeFiles --progress-num=9,10 "Built target gtest"
 .PHONY : gtest/googletest/CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.
@@ -477,13 +479,40 @@ gtest/googletest/CMakeFiles/gtest.dir/clean:
 .PHONY : gtest/googletest/CMakeFiles/gtest.dir/clean
 
 #=============================================================================
+# Target rules for target rosbag_tools/CMakeFiles/bag_merging.dir
+
+# All Build rule for target.
+rosbag_tools/CMakeFiles/bag_merging.dir/all:
+	$(MAKE) -f rosbag_tools/CMakeFiles/bag_merging.dir/build.make rosbag_tools/CMakeFiles/bag_merging.dir/depend
+	$(MAKE) -f rosbag_tools/CMakeFiles/bag_merging.dir/build.make rosbag_tools/CMakeFiles/bag_merging.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dearmoon/projects/rosbag_tools/build/CMakeFiles --progress-num=3,4 "Built target bag_merging"
+.PHONY : rosbag_tools/CMakeFiles/bag_merging.dir/all
+
+# Build rule for subdir invocation for target.
+rosbag_tools/CMakeFiles/bag_merging.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dearmoon/projects/rosbag_tools/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 rosbag_tools/CMakeFiles/bag_merging.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dearmoon/projects/rosbag_tools/build/CMakeFiles 0
+.PHONY : rosbag_tools/CMakeFiles/bag_merging.dir/rule
+
+# Convenience name for target.
+bag_merging: rosbag_tools/CMakeFiles/bag_merging.dir/rule
+
+.PHONY : bag_merging
+
+# clean rule for target.
+rosbag_tools/CMakeFiles/bag_merging.dir/clean:
+	$(MAKE) -f rosbag_tools/CMakeFiles/bag_merging.dir/build.make rosbag_tools/CMakeFiles/bag_merging.dir/clean
+.PHONY : rosbag_tools/CMakeFiles/bag_merging.dir/clean
+
+#=============================================================================
 # Target rules for target rosbag_tools/CMakeFiles/voxel_enhancing.dir
 
 # All Build rule for target.
 rosbag_tools/CMakeFiles/voxel_enhancing.dir/all:
 	$(MAKE) -f rosbag_tools/CMakeFiles/voxel_enhancing.dir/build.make rosbag_tools/CMakeFiles/voxel_enhancing.dir/depend
 	$(MAKE) -f rosbag_tools/CMakeFiles/voxel_enhancing.dir/build.make rosbag_tools/CMakeFiles/voxel_enhancing.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dearmoon/projects/rosbag_tools/build/CMakeFiles --progress-num=13,14 "Built target voxel_enhancing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dearmoon/projects/rosbag_tools/build/CMakeFiles --progress-num=15,16 "Built target voxel_enhancing"
 .PHONY : rosbag_tools/CMakeFiles/voxel_enhancing.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2022,7 +2051,7 @@ rosbag_tools/CMakeFiles/tf_generate_messages_cpp.dir/clean:
 rosbag_tools/CMakeFiles/rosbag_recorder.dir/all:
 	$(MAKE) -f rosbag_tools/CMakeFiles/rosbag_recorder.dir/build.make rosbag_tools/CMakeFiles/rosbag_recorder.dir/depend
 	$(MAKE) -f rosbag_tools/CMakeFiles/rosbag_recorder.dir/build.make rosbag_tools/CMakeFiles/rosbag_recorder.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dearmoon/projects/rosbag_tools/build/CMakeFiles --progress-num=11,12 "Built target rosbag_recorder"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dearmoon/projects/rosbag_tools/build/CMakeFiles --progress-num=13,14 "Built target rosbag_recorder"
 .PHONY : rosbag_tools/CMakeFiles/rosbag_recorder.dir/all
 
 # Build rule for subdir invocation for target.

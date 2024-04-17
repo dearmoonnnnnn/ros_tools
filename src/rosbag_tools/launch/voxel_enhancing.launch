@@ -1,11 +1,14 @@
- <!-- rosbag_play_radar_NWU.launch -->
+
 
 <!-- This launch file loads rosbags and makes an octomap file -->
 
 <launch>
 
-<!-- <param name="/use_sim_time" value="true"/> -->
+<node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen"/>
 
+<node pkg="rosbag_tools" name="point_cloud_enhancement_node" type="voxel_enhancing"  output="screen"/>
+
+<!-- You can add any arguments here if needed -->
 <!-- paths to the rosbag files -->
 <arg name="path" default="/home/dearmoon/datasets/NWU/"/>
 

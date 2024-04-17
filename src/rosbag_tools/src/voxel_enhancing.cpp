@@ -7,6 +7,7 @@
 #include <rosbag/bag.h>
 
 typedef pcl::PointCloud<pcl::PointXYZI> PCLPointCloud;
+rosbag::Bag bag;
 
 sensor_msgs::PointCloud enhancePointCloud(const sensor_msgs::PointCloud& inputCloud)
 {
@@ -31,7 +32,7 @@ sensor_msgs::PointCloud enhancePointCloud(const sensor_msgs::PointCloud& inputCl
     }
 
     // 设置体素化参数
-    float voxelSize = 0.1f;  // 体素大小，根据实际情况调整
+    float voxelSize = 0.3f;  // 体素大小，根据实际情况调整
 
     // 对点云进行体素化下采样
     pcl::VoxelGrid<pcl::PointXYZI> voxelGrid;
@@ -75,9 +76,9 @@ void pointCloudCallback(const sensor_msgs::PointCloud::ConstPtr& cloud)
     sensor_msgs::PointCloud enhancedCloud = enhancePointCloud(*cloud);
 
     // 将增强后的点云写入bag文件
-    rosbag::Bag bag("enhanced_point_cloud.bag", rosbag::bagmode::Write);
-    bag.write("/enhanced_point_cloud", cloud->header.stamp, enhancedCloud);
-    bag.close();
+    if (bag.isOpen()) {
+        bag.write("/enhanced_point_cloud", cloud->header.stamp, enhancedCloud);
+    }
 }
 
 int main(int argc, char** argv)
@@ -85,10 +86,13 @@ int main(int argc, char** argv)
     ros::init(argc, argv, "point_cloud_enhancement");
     ros::NodeHandle nh;
 
+    bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/4DRadar/enhanced/enhanced_point_cloud.bag", rosbag::bagmode::Write);    
     // 订阅原始点云话题
-    ros::Subscriber sub = nh.subscribe("/ars548_process/detection_point_cloud", 1, pointCloudCallback);
+    ros::Subscriber sub = nh.subscribe("/ars548_process/detection_point_cloud", 10, pointCloudCallback);
 
     ros::spin();
+
+    bag.close();
 
     return 0;
 }

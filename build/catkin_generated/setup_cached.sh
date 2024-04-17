@@ -7,7 +7,5 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/dearmoon/projects/rosbag_tools/devel:$CMAKE_PREFIX_PATH"
+export PATH='/opt/ros/noetic/bin:/home/dearmoon/miniconda3/condabin:/home/dearmoon/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
 export PWD='/home/dearmoon/projects/rosbag_tools/build'
-export ROSLISP_PACKAGE_DIRECTORIES="/home/dearmoon/projects/rosbag_tools/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
-export ROS_PACKAGE_PATH="/home/dearmoon/projects/rosbag_tools/src:$ROS_PACKAGE_PATH"

@@ -168,6 +168,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+rosbag_tools/CMakeFiles/bag_merging.dir/rule:
+	cd /home/dearmoon/projects/rosbag_tools/build && $(MAKE) -f CMakeFiles/Makefile2 rosbag_tools/CMakeFiles/bag_merging.dir/rule
+.PHONY : rosbag_tools/CMakeFiles/bag_merging.dir/rule
+
+# Convenience name for target.
+bag_merging: rosbag_tools/CMakeFiles/bag_merging.dir/rule
+
+.PHONY : bag_merging
+
+# fast build rule for target.
+bag_merging/fast:
+	cd /home/dearmoon/projects/rosbag_tools/build && $(MAKE) -f rosbag_tools/CMakeFiles/bag_merging.dir/build.make rosbag_tools/CMakeFiles/bag_merging.dir/build
+.PHONY : bag_merging/fast
+
+# Convenience name for target.
 rosbag_tools/CMakeFiles/voxel_enhancing.dir/rule:
 	cd /home/dearmoon/projects/rosbag_tools/build && $(MAKE) -f CMakeFiles/Makefile2 rosbag_tools/CMakeFiles/voxel_enhancing.dir/rule
 .PHONY : rosbag_tools/CMakeFiles/voxel_enhancing.dir/rule
@@ -1409,6 +1424,33 @@ src/bagToPcd.cpp.s:
 	cd /home/dearmoon/projects/rosbag_tools/build && $(MAKE) -f rosbag_tools/CMakeFiles/bagToPcd.dir/build.make rosbag_tools/CMakeFiles/bagToPcd.dir/src/bagToPcd.cpp.s
 .PHONY : src/bagToPcd.cpp.s
 
+src/bag_merging.o: src/bag_merging.cpp.o
+
+.PHONY : src/bag_merging.o
+
+# target to build an object file
+src/bag_merging.cpp.o:
+	cd /home/dearmoon/projects/rosbag_tools/build && $(MAKE) -f rosbag_tools/CMakeFiles/bag_merging.dir/build.make rosbag_tools/CMakeFiles/bag_merging.dir/src/bag_merging.cpp.o
+.PHONY : src/bag_merging.cpp.o
+
+src/bag_merging.i: src/bag_merging.cpp.i
+
+.PHONY : src/bag_merging.i
+
+# target to preprocess a source file
+src/bag_merging.cpp.i:
+	cd /home/dearmoon/projects/rosbag_tools/build && $(MAKE) -f rosbag_tools/CMakeFiles/bag_merging.dir/build.make rosbag_tools/CMakeFiles/bag_merging.dir/src/bag_merging.cpp.i
+.PHONY : src/bag_merging.cpp.i
+
+src/bag_merging.s: src/bag_merging.cpp.s
+
+.PHONY : src/bag_merging.s
+
+# target to generate assembly for a file
+src/bag_merging.cpp.s:
+	cd /home/dearmoon/projects/rosbag_tools/build && $(MAKE) -f rosbag_tools/CMakeFiles/bag_merging.dir/build.make rosbag_tools/CMakeFiles/bag_merging.dir/src/bag_merging.cpp.s
+.PHONY : src/bag_merging.cpp.s
+
 src/rosbag_recorder.o: src/rosbag_recorder.cpp.o
 
 .PHONY : src/rosbag_recorder.o
@@ -1474,6 +1516,7 @@ help:
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... bag_merging"
 	@echo "... voxel_enhancing"
 	@echo "... bagToPcd"
 	@echo "... tf2_msgs_generate_messages_nodejs"
@@ -1560,6 +1603,9 @@ help:
 	@echo "... src/bagToPcd.o"
 	@echo "... src/bagToPcd.i"
 	@echo "... src/bagToPcd.s"
+	@echo "... src/bag_merging.o"
+	@echo "... src/bag_merging.i"
+	@echo "... src/bag_merging.s"
 	@echo "... src/rosbag_recorder.o"
 	@echo "... src/rosbag_recorder.i"
 	@echo "... src/rosbag_recorder.s"

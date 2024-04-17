@@ -40,6 +40,7 @@
 /home/dearmoon/projects/rosbag_tools/build/rosbag_tools/CMakeFiles/install.dir
 /home/dearmoon/projects/rosbag_tools/build/rosbag_tools/CMakeFiles/list_install_components.dir
 /home/dearmoon/projects/rosbag_tools/build/rosbag_tools/CMakeFiles/rebuild_cache.dir
+/home/dearmoon/projects/rosbag_tools/build/rosbag_tools/CMakeFiles/bag_merging.dir
 /home/dearmoon/projects/rosbag_tools/build/rosbag_tools/CMakeFiles/voxel_enhancing.dir
 /home/dearmoon/projects/rosbag_tools/build/rosbag_tools/CMakeFiles/bagToPcd.dir
 /home/dearmoon/projects/rosbag_tools/build/rosbag_tools/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir

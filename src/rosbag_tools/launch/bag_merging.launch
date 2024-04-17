@@ -1,0 +1,6 @@
+<launch>
+
+<node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen"/>
+<node pkg="rosbag_tools" name="bag_merging" type="bag_merging"  output="screen"/>"
+
+</launch>

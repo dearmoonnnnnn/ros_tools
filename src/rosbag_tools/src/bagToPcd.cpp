@@ -32,7 +32,7 @@ void cloudCallback(const sensor_msgs::PointCloud::ConstPtr& cloud_msg)
     }
 
     // 根据当前帧序号动态生成输出文件名
-    std::string output_file = "/home/dearmoon/datasets/calib/NWU508_3/pcd/" + std::to_string(frame_count) + ".pcd";
+    std::string output_file = "/home/dearmoon/datasets/calib/NWU/pcd_2/" + std::to_string(frame_count) + ".pcd";
 
     pcl::io::savePCDFileASCII(output_file, cloud);
     ROS_INFO("Saved %lu data points to %s.", cloud.points.size(), output_file.c_str());

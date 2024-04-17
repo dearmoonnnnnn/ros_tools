@@ -285,6 +285,19 @@ gtest/fast:
 .PHONY : gtest/fast
 
 #=============================================================================
+# Target rules for targets named bag_merging
+
+# Build rule for target.
+bag_merging: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 bag_merging
+.PHONY : bag_merging
+
+# fast build rule for target.
+bag_merging/fast:
+	$(MAKE) -f rosbag_tools/CMakeFiles/bag_merging.dir/build.make rosbag_tools/CMakeFiles/bag_merging.dir/build
+.PHONY : bag_merging/fast
+
+#=============================================================================
 # Target rules for targets named voxel_enhancing
 
 # Build rule for target.
@@ -1359,6 +1372,7 @@ help:
 	@echo "... gmock"
 	@echo "... gtest_main"
 	@echo "... gtest"
+	@echo "... bag_merging"
 	@echo "... voxel_enhancing"
 	@echo "... bagToPcd"
 	@echo "... tf2_msgs_generate_messages_nodejs"

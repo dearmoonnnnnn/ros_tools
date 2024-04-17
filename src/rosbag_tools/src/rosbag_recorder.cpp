@@ -8,10 +8,12 @@ rosbag::Bag bag; // 声明一个rosbag
 void alCallback(const sensor_msgs::PointCloud::ConstPtr& msg) {
     // 在这里处理接收到的PointCloud消息
     // 可以通过msg来访问消息的数据
-
+    
+    std::cout << "alCallback" << std::endl;
     if (bag.isOpen()) {
         bag.write("/ars548_process/detection_point_cloud", msg->header.stamp, *msg);
         std::cout << "msg->header.stamp : " << msg->header.stamp << std::endl;
+        // std::cout << "msg.getTime():" << msg.getTime() << std::endl;
     }
 }
 
@@ -20,7 +22,7 @@ int main(int argc, char **argv) {
     ros::NodeHandle nh;
 
     // 打开Bag文件以写入
-    bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/4DRadar/日晴不颠簸低速3.bag", rosbag::bagmode::Write);
+    bag.open("/home/dearmoon/datasets/NWU/test/test_4DRadar.bag", rosbag::bagmode::Write);
 
     ros::Subscriber sub = nh.subscribe<sensor_msgs::PointCloud>("/ars548_process/detection_point_cloud", 10, alCallback);
 

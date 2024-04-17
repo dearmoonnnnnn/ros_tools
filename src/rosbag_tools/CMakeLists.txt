@@ -139,6 +139,7 @@ include_directories(
 add_executable(rosbag_recorder src/rosbag_recorder.cpp)
 add_executable(bagToPcd src/bagToPcd.cpp)
 add_executable(voxel_enhancing src/voxel_enhancing.cpp)
+add_executable(bag_merging src/bag_merging.cpp)
 
 
 ## Rename C++ executable without prefix
@@ -167,6 +168,9 @@ target_link_libraries(voxel_enhancing
   ${catkin_LIBRARIES}
 )
 
+target_link_libraries(bag_merging
+  ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
