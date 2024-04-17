@@ -10,6 +10,8 @@ rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/
 rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/class_loader/register_macro.hpp
 rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/class_loader/visibility_control.hpp
 rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/geometry_msgs/Point32.h
+rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/geometry_msgs/Quaternion.h
+rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/geometry_msgs/Vector3.h
 rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/pluginlib/class_desc.hpp
 rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/pluginlib/class_loader.hpp
 rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/pluginlib/class_loader_base.hpp
@@ -88,6 +90,7 @@ rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/
 rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/rosconsole/macros_generated.h
 rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/roslz4/lz4s.h
 rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/sensor_msgs/ChannelFloat32.h
+rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/sensor_msgs/Imu.h
 rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/sensor_msgs/PointCloud.h
 rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/std_msgs/Header.h
 rosbag_tools/CMakeFiles/rosbag_recorder.dir/src/rosbag_recorder.cpp.o: /opt/ros/noetic/include/xmlrpcpp/XmlRpcDecl.h

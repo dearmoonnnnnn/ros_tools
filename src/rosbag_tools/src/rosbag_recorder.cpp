@@ -1,19 +1,33 @@
 #include "ros/ros.h"
 #include "sensor_msgs/PointCloud.h"
+#include "sensor_msgs/Imu.h"
 #include "rosbag/bag.h"
 #include "rosbag/view.h"
 
 rosbag::Bag bag; // 声明一个rosbag
-
-void alCallback(const sensor_msgs::PointCloud::ConstPtr& msg) {
+int cloud_msg_count = 0;
+int imu_msg_count = 0;
+void cloud_callback(const sensor_msgs::PointCloud::ConstPtr& msg) {
     // 在这里处理接收到的PointCloud消息
     // 可以通过msg来访问消息的数据
     
-    std::cout << "alCallback" << std::endl;
+    std::cout << "cloud_callback" << std::endl;
     if (bag.isOpen()) {
         bag.write("/ars548_process/detection_point_cloud", msg->header.stamp, *msg);
-        std::cout << "msg->header.stamp : " << msg->header.stamp << std::endl;
-        // std::cout << "msg.getTime():" << msg.getTime() << std::endl;
+        cloud_msg_count++;
+        std::cout << "radar timestamp : " << msg->header.stamp << std::endl;
+        std::cout << "cloud_msg_count : " << cloud_msg_count << std::endl;
+    }
+}
+
+void imu_callback(const sensor_msgs::Imu::ConstPtr& msg) {
+    
+    std::cout << "imu_callback" << std::endl;
+    if (bag.isOpen()) {
+        bag.write("/livox/imu", msg->header.stamp, *msg);
+        imu_msg_count++;
+        std::cout << "imu timestamp :" << msg->header.stamp << std::endl;
+        std::cout << "imu_msg_count : " << imu_msg_count << std::endl;
     }
 }
 
@@ -22,9 +36,10 @@ int main(int argc, char **argv) {
     ros::NodeHandle nh;
 
     // 打开Bag文件以写入
-    bag.open("/home/dearmoon/datasets/NWU/test/test_4DRadar.bag", rosbag::bagmode::Write);
+    bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/imu_4DRadar.bag",  rosbag::bagmode::Append);
 
-    ros::Subscriber sub = nh.subscribe<sensor_msgs::PointCloud>("/ars548_process/detection_point_cloud", 10, alCallback);
+    ros::Subscriber sub_radar = nh.subscribe<sensor_msgs::PointCloud>("/ars548_process/detection_point_cloud", 10, cloud_callback);
+    ros::Subscriber sub_imu = nh.subscribe<sensor_msgs::Imu>("/livox/imu", 10, imu_callback);
 
     ros::spin(); // 进入ROS主循环，等待消息
 
