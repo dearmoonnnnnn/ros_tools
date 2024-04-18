@@ -11,11 +11,13 @@ int main(int argc, char** argv) {
     int radar_count = 0;
     int imu_count = 0;
 
+    double timestamp_temp = 0;
+
     // 从ROS参数服务器获取输入bag文件的路径和输出bag文件的路径
     std::string bag1_path, bag2_path, output_bag_path;
     bag1_path = "/home/dearmoon/datasets/NWU/RiQingBuDianBoDiSu3/4DRadar/RiQingBuDianBoDiSu3.bag";
     bag2_path = "/home/dearmoon/datasets/NWU/RiQingBuDianBoDiSu3/imu.bag";
-    output_bag_path = "/home/dearmoon/datasets/NWU/RiQingBuDianBoDiSu3/imu_4DRadar.bag";
+    output_bag_path = "/home/dearmoon/datasets/NWU/RiQingBuDianBoDiSu3/test.bag";
 
     // nh.param<std::string>("bag1_path", bag1_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/4DRadar/RiQingBuDianBoDiSu3.bag");   // Radar
     // nh.param<std::string>("bag2_path", bag2_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/3.bag");                             // IMU
@@ -41,15 +43,31 @@ int main(int argc, char** argv) {
     for (const rosbag::MessageInstance& msg : view1) {
         output_bag.write(msg.getTopic(), msg.getTime(), msg);
         radar_count++;
-        std::cout << "radar_count: " << radar_count << std::endl;
     }
 
     for (const rosbag::MessageInstance& msg : view2) {
         // std::cout << " msg.getTime(): " << msg.getTime() << std::endl;
         imu_count++;
         output_bag.write(msg.getTopic(), msg.getTime(), msg);
-        std::cout << "imu_count: " << imu_count << std::endl;
+
+
+        // 检查时间戳顺序是否正确
+        if(imu_count == 1){
+            timestamp_temp = msg.getTime().toSec();
+        }
+        else if( timestamp_temp > msg.getTime().toSec())  {
+            std::cout << "timestamp is in disorder!!!" << std::endl; 
+            exit(1);
+        }  
+        else {
+            timestamp_temp = msg.getTime().toSec();
+            std::cout << "timestamp "<< timestamp_temp <<  " is in order" << std::endl;
+        }
+
     }
+
+    std::cout << "radar_count: " << radar_count << std::endl;
+    std::cout << "imu_count: " << imu_count << std::endl;
 
     // 关闭输入和输出的bag文件
     bag1.close();
