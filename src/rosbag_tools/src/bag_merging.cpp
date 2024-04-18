@@ -8,16 +8,28 @@ int main(int argc, char** argv) {
     ros::init(argc, argv, "bag_merger");
     ros::NodeHandle nh;
 
+    int radar_count = 0;
+    int imu_count = 0;
+
     // 从ROS参数服务器获取输入bag文件的路径和输出bag文件的路径
     std::string bag1_path, bag2_path, output_bag_path;
-    nh.param<std::string>("bag1_path", bag1_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/4DRadar/RiQingBuDianBoDiSu3.bag");   // Radar
-    nh.param<std::string>("bag2_path", bag2_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/3.bag");                             // IMU
-    nh.param<std::string>("output_bag_path", output_bag_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/imu_4DRadar.bag");
+    bag1_path = "/home/dearmoon/datasets/NWU/RiQingBuDianBoDiSu3/4DRadar/RiQingBuDianBoDiSu3.bag";
+    bag2_path = "/home/dearmoon/datasets/NWU/RiQingBuDianBoDiSu3/imu.bag";
+    output_bag_path = "/home/dearmoon/datasets/NWU/RiQingBuDianBoDiSu3/imu_4DRadar.bag";
+
+    // nh.param<std::string>("bag1_path", bag1_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/4DRadar/RiQingBuDianBoDiSu3.bag");   // Radar
+    // nh.param<std::string>("bag2_path", bag2_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/3.bag");                             // IMU
+    // nh.param<std::string>("output_bag_path", output_bag_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/imu_4DRadar.bag");
 
     // 打开输入bag文件和输出bag文件
     rosbag::Bag bag1(bag1_path, rosbag::bagmode::Read);
+    std::cout << "bag1_path: " << bag1_path << std::endl;
+
     rosbag::Bag bag2(bag2_path, rosbag::bagmode::Read);
+    std::cout << "bag2_path: " << bag2_path << std::endl;
+
     rosbag::Bag output_bag(output_bag_path, rosbag::bagmode::Write);
+    std::cout << "output_bag_path: " << output_bag_path << std::endl;
 
     // 创建一个Topic过滤器，选择需要保留的所有话题
     // rosbag::View view1(bag1, rosbag::TopicQuery("/a1") || rosbag::TopicQuery("/a2") || rosbag::TopicQuery("/a3"));
@@ -28,11 +40,15 @@ int main(int argc, char** argv) {
     // 循环读取输入bag文件中的消息并写入输出bag文件
     for (const rosbag::MessageInstance& msg : view1) {
         output_bag.write(msg.getTopic(), msg.getTime(), msg);
+        radar_count++;
+        std::cout << "radar_count: " << radar_count << std::endl;
     }
 
     for (const rosbag::MessageInstance& msg : view2) {
-        std::cout << " msg.getTime(): " << msg.getTime() << std::endl;
+        // std::cout << " msg.getTime(): " << msg.getTime() << std::endl;
+        imu_count++;
         output_bag.write(msg.getTopic(), msg.getTime(), msg);
+        std::cout << "imu_count: " << imu_count << std::endl;
     }
 
     // 关闭输入和输出的bag文件
