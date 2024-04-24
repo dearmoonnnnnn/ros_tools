@@ -9,3 +9,4 @@
 # modified environment variables
 export PATH='/opt/ros/noetic/bin:/home/dearmoon/miniconda3/condabin:/home/dearmoon/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
 export PWD='/home/dearmoon/projects/rosbag_tools/build'
+export PYTHONPATH="/home/dearmoon/projects/rosbag_tools/devel/lib/python3/dist-packages:$PYTHONPATH"

@@ -6,6 +6,42 @@
 
 #IncludeRegexTransform: 
 
+/home/dearmoon/projects/rosbag_tools/devel/include/rosbag_tools/CustomMsg.h
+string
+-
+vector
+-
+memory
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+std_msgs/Header.h
+-
+rosbag_tools/CustomPoint.h
+-
+
+/home/dearmoon/projects/rosbag_tools/devel/include/rosbag_tools/CustomPoint.h
+string
+-
+vector
+-
+memory
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+
 /home/dearmoon/projects/rosbag_tools/src/rosbag_tools/src/bagToPcd.cpp
 ros/ros.h
 -
@@ -14,6 +50,8 @@ sensor_msgs/PointCloud.h
 pcl/io/pcd_io.h
 -
 pcl/point_types.h
+-
+rosbag_tools/CustomMsg.h
 -
 
 /opt/ros/noetic/include/geometry_msgs/Point32.h

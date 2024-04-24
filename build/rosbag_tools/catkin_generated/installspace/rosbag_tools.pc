@@ -3,6 +3,6 @@ prefix=/home/dearmoon/projects/rosbag_tools/install
 Name: rosbag_tools
 Description: Description of rosbag_tools
 Version: 0.0.0
-Cflags: 
+Cflags: -I${prefix}/include
 Libs: -L${prefix}/lib 
-Requires: 
+Requires: roscpp sensor_msgs
