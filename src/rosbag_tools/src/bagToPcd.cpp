@@ -34,7 +34,7 @@ void radarcloud_Callback(const sensor_msgs::PointCloud::ConstPtr& cloud_msg)
     }
 
     // 根据当前帧序号动态生成输出文件名
-    std::string output_file = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/radar_pcd/radar_pcd_" + std::to_string(radar_frame_count) + ".pcd";
+    std::string output_file = "/home/dearmoon/datasets/NWU/日晴不颠簸高速4/radar_pcd/radar_pcd_" + std::to_string(radar_frame_count) + ".pcd";
 
     pcl::io::savePCDFileASCII(output_file, cloud);
     ROS_INFO("Saved %lu data points to %s.", cloud.points.size(), output_file.c_str());
@@ -64,7 +64,7 @@ void lidarcloud_Callback(const rosbag_tools::CustomMsg & cloud_msg)
     }
 
     // 生成pcd文件名
-    std::string pcd_filename = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/livox_pcd/lidar_pcd_" + std::to_string(lidar_frame_count) + ".pcd";
+    std::string pcd_filename = "/home/dearmoon/datasets/NWU/日晴不颠簸高速4/lidar_pcd/lidar_pcd_" + std::to_string(lidar_frame_count) + ".pcd";
     // 保存PointCloud到pcd文件
     pcl::io::savePCDFileASCII(pcd_filename, pcl_cloud);
     

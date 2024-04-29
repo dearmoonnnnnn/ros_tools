@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
     ros::NodeHandle nh;
 
     // 打开Bag文件以写入
-    bag.open("/home/dearmoon/datasets/calib/NWU/calib_420/calib_420_4DRadar.bag",  rosbag::bagmode::Write);
+    bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸高速4/4DRadar_721.bag",  rosbag::bagmode::Write);
 
     ros::Subscriber sub_radar = nh.subscribe<sensor_msgs::PointCloud>("/ars548_process/detection_point_cloud", 10, cloud_callback);
     ros::Subscriber sub_imu = nh.subscribe<sensor_msgs::Imu>("/livox/imu", 10, imu_callback);

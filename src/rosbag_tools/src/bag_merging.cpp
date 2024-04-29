@@ -3,6 +3,11 @@
 #include "rosbag/view.h"
 #include "std_msgs/String.h"
 
+/* 
+ * 将两个bag包合并成一个新的bag包
+*/
+
+
 int main(int argc, char** argv) {
     // 初始化ROS节点
     ros::init(argc, argv, "bag_merger");
@@ -15,9 +20,9 @@ int main(int argc, char** argv) {
 
     // 从ROS参数服务器获取输入bag文件的路径和输出bag文件的路径
     std::string bag1_path, bag2_path, output_bag_path;
-    bag1_path = "/home/dearmoon/datasets/NWU/RiQingBuDianBoDiSu3/4DRadar/RiQingBuDianBoDiSu3.bag";
-    bag2_path = "/home/dearmoon/datasets/NWU/RiQingBuDianBoDiSu3/imu.bag";
-    output_bag_path = "/home/dearmoon/datasets/NWU/RiQingBuDianBoDiSu3/test.bag";
+    bag1_path = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/4DRadar/RiQingBuDianBoDiSu3.bag";
+    bag2_path = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/3.bag";
+    output_bag_path = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/radar_lidar.bag";
 
     // nh.param<std::string>("bag1_path", bag1_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/4DRadar/RiQingBuDianBoDiSu3.bag");   // Radar
     // nh.param<std::string>("bag2_path", bag2_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/3.bag");                             // IMU
@@ -37,7 +42,7 @@ int main(int argc, char** argv) {
     // rosbag::View view1(bag1, rosbag::TopicQuery("/a1") || rosbag::TopicQuery("/a2") || rosbag::TopicQuery("/a3"));
     // rosbag::View view2(bag2, rosbag::TopicQuery("/b1") || rosbag::TopicQuery("/b2"));
     rosbag::View view1(bag1, rosbag::TopicQuery("/ars548_process/detection_point_cloud"));
-    rosbag::View view2(bag2, rosbag::TopicQuery("/livox/imu") );
+    rosbag::View view2(bag2, rosbag::TopicQuery("/livox/lidar") );
 
     // 循环读取输入bag文件中的消息并写入输出bag文件
     for (const rosbag::MessageInstance& msg : view1) {
