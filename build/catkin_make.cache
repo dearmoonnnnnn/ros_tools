@@ -1,2 +1,0 @@
-rosbag_tools
--DCATKIN_DEVEL_PREFIX=/home/dearmoon/projects/rosbag_tools/devel -DCMAKE_INSTALL_PREFIX=/home/dearmoon/projects/rosbag_tools/install -G Unix Makefiles
