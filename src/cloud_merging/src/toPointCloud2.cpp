@@ -13,3 +13,8 @@
  *  原点云数据格式：CustomMsg和PointCloud
  *  转换后数据格式：PointCloud2
 */
+
+int main (){
+
+    return 0;
+}
