@@ -140,6 +140,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/cloud_merging_node.cpp)
 add_executable(systime_cloud_merging src/systime_cloud_merging.cpp)
+add_executable(toPointCloud2 src/toPointCloud2.cpp)
 
 
 ## Rename C++ executable without prefix
@@ -159,6 +160,9 @@ add_executable(systime_cloud_merging src/systime_cloud_merging.cpp)
 target_link_libraries(systime_cloud_merging
   ${catkin_LIBRARIES}
 )
+
+target_link_libraries(toPointCloud2
+  ${catkin_LIBRARIES})
 
 #############
 ## Install ##
