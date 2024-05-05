@@ -17,6 +17,12 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
 )
 
+
+find_package(OpenCV REQUIRED)
+
+  
+
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -123,7 +129,8 @@ include_directories(
   src
 # include
   ${catkin_INCLUDE_DIRS}
-)
+  ${OpenCV_INCLUDE_DIRS}
+  )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
@@ -141,6 +148,7 @@ include_directories(
 # add_executable(${PROJECT_NAME}_node src/cloud_merging_node.cpp)
 add_executable(systime_cloud_merging src/systime_cloud_merging.cpp)
 add_executable(toPointCloud2 src/toPointCloud2.cpp)
+add_executable(cloud_merging src/cloud_merging.cpp)
 
 
 ## Rename C++ executable without prefix
@@ -162,7 +170,13 @@ target_link_libraries(systime_cloud_merging
 )
 
 target_link_libraries(toPointCloud2
-  ${catkin_LIBRARIES})
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(cloud_merging
+  ${catkin_LIBRARIES} 
+  ${OpenCV_LIBRARIES}
+)
 
 #############
 ## Install ##
