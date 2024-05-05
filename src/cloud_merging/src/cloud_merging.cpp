@@ -1,4 +1,5 @@
 /*
+ * step3:
  * cloud_merging.cpp
  * 将同一个bag文件中的两个不同的点云数据进行合并
  * TODO: 配置文件，编译调试
@@ -67,7 +68,7 @@ int main(int argc, char** argv) {
 
     // 订阅两个点云话题
     message_filters::Subscriber<sensor_msgs::PointCloud2> lidar_sub(nh, "/livox/lidar_PointCloud2", 10);
-    message_filters::Subscriber<sensor_msgs::PointCloud2> radar_sub(nh, "ars548_process/detection_PointCloud2", 10);
+    message_filters::Subscriber<sensor_msgs::PointCloud2> radar_sub(nh, "/ars548_process/detection_PointCloud2", 10);
 
     // 创建时间同步器，使用ApproximateTime策略
     message_filters::Synchronizer<MySyncPolicy> sync(MySyncPolicy(10), lidar_sub, radar_sub);

@@ -8,6 +8,7 @@
 #include <message_filters/subscriber.h>
 
 /*
+ *  step1:
  *  将时间同步后的两种数据写入一个bag包中
  */
 
@@ -27,7 +28,7 @@ void callback(const sensor_msgs::PointCloud::ConstPtr& radar_msg, const rosbag_t
     if (output_bag.isOpen()){
         // 将处理后的消息写入新的 ROS bag 文件
         output_bag.write("/ars548_process/detection_point_cloud", radar_msg->header.stamp, *radar_msg);
-        output_bag.write("/lidar/lidar", lidar_msg->header.stamp, *lidar_msg);
+        output_bag.write("/livox/lidar", lidar_msg->header.stamp, *lidar_msg);
         count++;
     }
 

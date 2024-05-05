@@ -9,13 +9,16 @@
 #include <pcl/point_cloud.h>
 
 /*
+ * step2:
  * 将 sensor_msgs::PointCloud 消息转换为 sensor_msgs::PointCloud2 消息
  * 将 CustomMsg 消息转换为 sensor_msgs::PointCloud2 消息
+ * 输入：订阅的两个话题
+ * 输出：保存两个话题的bag文件
  */
 
 
-ros::Publisher pcl2_pub;
-ros::Publisher custom_pcl2_pub;
+// ros::Publisher pcl2_pub = nh.advertise<sensor_msgs::PointCloud2>("/ars458_process/detectioin_point_cloud", 10);
+// ros::Publisher custom_pcl2_pub = custom_pcl2_pub = nh.advertise<sensor_msgs::PointCloud2>("/livox/lidar", 10);
 rosbag::Bag output_bag;
 
 // 回调函数处理 sensor_msgs::PointCloud 消息
@@ -32,7 +35,7 @@ void pointcloudCallback(const sensor_msgs::PointCloudConstPtr& msg) {
         point_xyzi.x = msg->points[i].x;
         point_xyzi.y = msg->points[i].y;
         point_xyzi.z = msg->points[i].z;
-        point_xyzi.intensity = msg->channels[2].values[i];   // 添加强度信息
+        point_xyzi.intensity = msg->channels[1].values[i];   // 添加强度信息
         radarCloud_xyzi->points.push_back(point_xyzi);    
     }
 
@@ -89,14 +92,13 @@ int main(int argc, char** argv) {
     ros::NodeHandle nh;
 
     // 创建 ROS 发布器
-    pcl2_pub = nh.advertise<sensor_msgs::PointCloud2>("/ars458_process/detectioin_point_cloud", 10);
-    custom_pcl2_pub = nh.advertise<sensor_msgs::PointCloud2>("/livox/lidar", 10);
+
 
     // 打开新的 ROS bag 文件
     output_bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/radar_lidar_step2.bag", rosbag::bagmode::Write);
 
     // 订阅 sensor_msgs::PointCloud 和 livox_ros_driver::CustomMsg 话题，并设置回调函数
-    ros::Subscriber pointcloud_sub = nh.subscribe("/ars458_process/detectioin_point_cloud", 10, pointcloudCallback);
+    ros::Subscriber pointcloud_sub = nh.subscribe("/ars548_process/detection_point_cloud", 10, pointcloudCallback);
     ros::Subscriber custom_sub = nh.subscribe("/livox/lidar", 10, customMsgCallback);
 
     ros::spin();
