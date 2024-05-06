@@ -51,8 +51,10 @@ void pointcloudCallback(const sensor_msgs::PointCloudConstPtr& msg) {
     // pcl2_pub.publish(pcl2_msg);
 
     // 将转换后的消息写入新的 ROS bag 文件
-    output_bag.write("/ars458_process/detectioin_PointCloud2", pcl2_msg.header.stamp, pcl2_msg);
-    std::cout << "radar timestamp" << pcl2_msg.header.stamp << std::endl;
+    output_bag.write("/ars548_process/detectioin_PointCloud2", pcl2_msg.header.stamp, pcl2_msg);
+   
+    ROS_INFO("radar timestamp: %f", pcl2_msg.header.stamp.toSec());
+    std::cout << "radar timestamp: " << pcl2_msg.header.stamp << std::endl;
 }
 
 // 回调函数处理 livox_ros_driver::CustomMsg 消息
@@ -84,7 +86,9 @@ void customMsgCallback(const rosbag_tools::CustomMsgConstPtr& msg) {
 
     // 将转换后的消息写入新的 ROS bag 文件
     output_bag.write("/livox/lidar_PointCloud2", custom_pcl2_msg.header.stamp, custom_pcl2_msg);
-    std::cout << "lidar timestamp" << custom_pcl2_msg.header.stamp << std::endl;
+    
+    ROS_INFO("lidar timestamp: %f", custom_pcl2_msg.header.stamp.toSec());
+    std::cout << "lidar timestamp: " << custom_pcl2_msg.header.stamp << std::endl;
 }
 
 int main(int argc, char** argv) {
