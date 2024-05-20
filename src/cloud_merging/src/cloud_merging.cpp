@@ -54,7 +54,7 @@ void callback(const sensor_msgs::PointCloud2ConstPtr& lidar_msg, const sensor_ms
         merged_cloud->push_back(point);
     }
 
-    // 将点从 livox 坐标系转到 Radar 坐标系
+    // 毫米波雷达数据
     for (int i = 0; i < radar_cloud->size(); i++) {
         pcl::PointXYZI point;
         point.x = radar_cloud->points[i].x;
