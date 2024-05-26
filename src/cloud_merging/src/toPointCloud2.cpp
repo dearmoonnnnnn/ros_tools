@@ -99,8 +99,7 @@ void pointcloudCallback(const sensor_msgs::PointCloudConstPtr& msg) {
     /*
      * sensor_msgs::PointCloud2多普勒速度调试输出
      */
- 
-    if(1){
+    if(0){
         int doppler_offset = -1;
         for (const auto& field : pcl2_msg.fields)
         {
@@ -130,6 +129,21 @@ void pointcloudCallback(const sensor_msgs::PointCloudConstPtr& msg) {
 
             // 打印或处理强度信息
             ROS_INFO("Point %zu: doppler velocity=%f", i, doppler_velocity);
+        }
+    }
+    
+    /*
+     * fromROSMsg调试
+     */
+    if(1){
+        pcl::PointCloud<pcl::PointXYZIDV>::Ptr pointcloud_test( new pcl::PointCloud<pcl::PointXYZIDV>);
+        pcl::fromROSMsg(pcl2_msg, *pointcloud_test);
+ 
+        for( size_t i = 0; i < pointcloud_test->size(); i++){
+            float intensity = pointcloud_test->points[i].intensity;
+            float doppler_velocity = pointcloud_test->points[i].doppler_velocity;   
+
+            ROS_INFO("After fromROSMsg , pointcloud_test, point[%zu] : intensity=%f, doppler velocity=%f", i, intensity, doppler_velocity);
         }
     }
 

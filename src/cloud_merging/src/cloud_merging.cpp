@@ -1,10 +1,3 @@
-/*
- * step3:
- * cloud_merging.cpp
- * 将同一个bag文件中的两个不同的点云数据进行合并
- * TODO: 配置文件，编译调试
- */
-
 #include <ros/ros.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <message_filters/subscriber.h>
@@ -16,6 +9,14 @@
 #include <opencv2/opencv.hpp>
 #include <rosbag/bag.h>
 
+
+/*
+ * step3:
+ * cloud_merging.cpp
+ * 将同一个bag文件中的两个不同的点云数据进行合并
+ * 
+ * TODO: 配置文件，编译调试
+ */
 
 ros::Publisher merged_pub;
 rosbag::Bag bag;
