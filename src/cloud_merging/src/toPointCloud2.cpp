@@ -24,7 +24,11 @@
 // ros::Publisher custom_pcl2_pub = custom_pcl2_pub = nh.advertise<sensor_msgs::PointCloud2>("/livox/lidar", 10);
 rosbag::Bag output_bag;
 
-// 回调函数处理 sensor_msgs::PointCloud 消息
+/* 
+ * 回调函数处理 sensor_msgs::PointCloud 消息
+ * 将 sensor_msgs::PointCloud 消息转换为 sensor_msgs::PointCloud2 消息
+ * 点包含信号强度和多普勒速度信息
+ */
 void pointcloudCallback(const sensor_msgs::PointCloudConstPtr& msg) {
 
     sensor_msgs::PointCloud2 pcl2_msg;
@@ -156,7 +160,11 @@ void pointcloudCallback(const sensor_msgs::PointCloudConstPtr& msg) {
 
 }
 
-// 回调函数处理 livox_ros_driver::CustomMsg 消息
+/*
+ * 回调函数处理 livox_ros_driver::CustomMsg 消息
+ * 将 livox_ros_driver::CustomMsg 消息转换为 sensor_msgs::PointCloud2 消息
+ * 点信号强度，不包含多普勒速度信息
+ */
 void customMsgCallback(const rosbag_tools::CustomMsgConstPtr& msg) {
     pcl::PointXYZI point_xyzi;
     pcl::PointCloud<pcl::PointXYZI>::Ptr lidarCloud_xyzi( new pcl::PointCloud<pcl::PointXYZI> );
@@ -198,8 +206,8 @@ int main(int argc, char** argv) {
 
 
     // 打开新的 ROS bag 文件
-    // output_bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/radar_lidar_step2.bag", rosbag::bagmode::Write);
-    output_bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/one_msg_test_step2.bag", rosbag::bagmode::Write);
+    output_bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/radar_lidar_step2.bag", rosbag::bagmode::Write);
+    // output_bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/one_msg_test_step2.bag", rosbag::bagmode::Write);
 
     // 订阅 sensor_msgs::PointCloud 和 livox_ros_driver::CustomMsg 话题，并设置回调函数
     ros::Subscriber pointcloud_sub = nh.subscribe("/ars548_process/detection_point_cloud", 10, pointcloudCallback);

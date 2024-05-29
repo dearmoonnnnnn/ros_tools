@@ -8,7 +8,7 @@ rosbag::Bag bag; // 声明一个rosbag
 int cloud_msg_count = 0;
 int imu_msg_count = 0;
 
-int cloud_msg_count_max = 11717;
+int cloud_msg_count_max = 9918;
 
 void cloud_callback(const sensor_msgs::PointCloud::ConstPtr& msg) {
     // 在这里处理接收到的PointCloud消息
@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
     ros::NodeHandle nh;
 
     // 打开Bag文件以写入
-    bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/4DRadar/RiQingBuDianBoDiSu3.bag",  rosbag::bagmode::Write);
+    bag.open("/home/dearmoon/datasets/NWU/日雪不颠簸高速/4DRadar/xr.bag",  rosbag::bagmode::Write);
     // 如果 cloud_msg_count 达到阈值，停止运行节点
 
  
