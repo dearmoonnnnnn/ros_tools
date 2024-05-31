@@ -32,7 +32,7 @@ cv::Mat livox_to_Radar = (cv::Mat_<double>(4, 4) <<
  0,  0,  0,  1);
 
 void callback(const sensor_msgs::PointCloud2ConstPtr& lidar_msg, const sensor_msgs::PointCloud2ConstPtr& radar_msg) {
-    
+
     pcl::PointCloud<pcl::PointXYZIDV>::Ptr merged_cloud(new pcl::PointCloud<pcl::PointXYZIDV>);
     pcl::PointCloud<pcl::PointXYZIDV>::Ptr radar_cloud(new pcl::PointCloud<pcl::PointXYZIDV>);
     pcl::PointCloud<pcl::PointXYZI>::Ptr lidar_cloud(new pcl::PointCloud<pcl::PointXYZI>);      // 激光雷达点云不包含多普勒速度，使用PointXYZI格式
@@ -53,6 +53,7 @@ void callback(const sensor_msgs::PointCloud2ConstPtr& lidar_msg, const sensor_ms
     }
 
     // 合并距离内的激光雷达数据
+    int lidar_count = 0;             // 激光雷达计数器，填充的激光雷达点数量
     for (const auto& lidar_point : lidar_cloud->points) {
         
         // 应用变换矩阵进行坐标变换，将点从 livox 坐标系转到 Radar 坐标系
@@ -76,15 +77,16 @@ void callback(const sensor_msgs::PointCloud2ConstPtr& lidar_msg, const sensor_ms
 
             if (distance < distance_threshold) {
                 merged_cloud->push_back(point);
+                lidar_count++;
                 break; // 只保留一次，避免重复加入激光雷达点
             }
         }
     }
 
 
-    // ROS_INFO("radar size: %ld", radar_cloud->size());
-    // ROS_INFO("lidar size: %ld", lidar_cloud->size());
-    // ROS_INFO("merged size: %ld", merged_cloud->size());
+    ROS_INFO("radar size: %ld", radar_cloud->size());
+    ROS_INFO("lidar size: %d", lidar_count);
+    ROS_INFO("merged size: %ld", merged_cloud->size());
     /**************************融合点云数据***************************/
 
 
@@ -108,7 +110,7 @@ int main(int argc, char** argv) {
     // 创建发布者，发布融合后的点云消息到radar_merged话题
     merged_pub = nh.advertise<sensor_msgs::PointCloud2>("/radar_merged", 1);
 
-    bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/radar_lidar_output.bag", rosbag::bagmode::Write);
+    bag.open("/home/dearmoon/datasets/NWU/日雪不颠簸高速/enahancing/radar_lidar_output.bag", rosbag::bagmode::Write);
 
     // 订阅两个点云话题
     message_filters::Subscriber<sensor_msgs::PointCloud2> lidar_sub(nh, "/livox/lidar_PointCloud2", 10);

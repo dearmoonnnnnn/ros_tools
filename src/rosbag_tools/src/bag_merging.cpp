@@ -7,22 +7,21 @@
  * 将两个bag包合并成一个新的bag包
 */
 
-
 int main(int argc, char** argv) {
     // 初始化ROS节点
     ros::init(argc, argv, "bag_merger");
     ros::NodeHandle nh;
 
     int radar_count = 0;
-    int imu_count = 0;
+    int lidar_count = 0;
 
     double timestamp_temp = 0;
 
     // 从ROS参数服务器获取输入bag文件的路径和输出bag文件的路径
     std::string bag1_path, bag2_path, output_bag_path;
-    bag1_path = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/4DRadar/RiQingBuDianBoDiSu3.bag";
-    bag2_path = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/3.bag";
-    output_bag_path = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/radar_lidar.bag";
+    bag1_path = "/home/dearmoon/datasets/NWU/日雪不颠簸高速/4DRadar/xr.bag";
+    bag2_path = "/home/dearmoon/datasets/NWU/日雪不颠簸高速/bdbxr.bag";
+    output_bag_path = "/home/dearmoon/datasets/NWU/日雪不颠簸高速/radar_lidar.bag";
 
     // nh.param<std::string>("bag1_path", bag1_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/4DRadar/RiQingBuDianBoDiSu3.bag");   // Radar
     // nh.param<std::string>("bag2_path", bag2_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/3.bag");                             // IMU
@@ -52,12 +51,12 @@ int main(int argc, char** argv) {
 
     for (const rosbag::MessageInstance& msg : view2) {
         // std::cout << " msg.getTime(): " << msg.getTime() << std::endl;
-        imu_count++;
+        lidar_count++;
         output_bag.write(msg.getTopic(), msg.getTime(), msg);
 
 
         // 检查时间戳顺序是否正确
-        if(imu_count == 1){
+        if(lidar_count == 1){
             timestamp_temp = msg.getTime().toSec();
         }
         else if( timestamp_temp > msg.getTime().toSec())  {
@@ -72,7 +71,7 @@ int main(int argc, char** argv) {
     }
 
     std::cout << "radar_count: " << radar_count << std::endl;
-    std::cout << "imu_count: " << imu_count << std::endl;
+    std::cout << "lidar_count: " << lidar_count << std::endl;
 
     // 关闭输入和输出的bag文件
     bag1.close();
