@@ -85,7 +85,7 @@ void callback(const sensor_msgs::PointCloud2ConstPtr& lidar_msg, const sensor_ms
     }
 
 
-    ROS_INFO("lidar origin size: %d", lidar_cloud->size())
+    ROS_INFO("lidar origin size: %ld", lidar_cloud->size());
     ROS_INFO("lidar pushed size: %d", lidar_count);
     ROS_INFO("radar size: %ld", radar_cloud->size());
     ROS_INFO("merged size: %ld", merged_cloud->size());

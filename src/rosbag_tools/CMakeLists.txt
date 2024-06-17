@@ -174,6 +174,9 @@ target_link_libraries(bag_merging
   ${catkin_LIBRARIES}
 )
 
+target_link_libraries(stringMsgSender
+  ${catkin_LIBRARIES}  
+)
 
 #############
 ## Install ##
