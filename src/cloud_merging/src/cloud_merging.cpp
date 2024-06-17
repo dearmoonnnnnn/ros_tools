@@ -22,7 +22,7 @@
 
 ros::Publisher merged_pub;
 rosbag::Bag bag;
-float distance_threshold = 1.0;  // 距离阈值，可以根据需要调整
+float distance_threshold = 5.0;  // 距离阈值，可以根据需要调整
 
 typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::PointCloud2, sensor_msgs::PointCloud2> MySyncPolicy;
 cv::Mat livox_to_Radar = (cv::Mat_<double>(4, 4) <<
@@ -75,6 +75,7 @@ void callback(const sensor_msgs::PointCloud2ConstPtr& lidar_msg, const sensor_ms
             float dz = point.z - radar_point.z;
             float distance = std::sqrt(dx * dx + dy * dy + dz * dz);
 
+
             if (distance < distance_threshold) {
                 merged_cloud->push_back(point);
                 lidar_count++;
@@ -84,9 +85,11 @@ void callback(const sensor_msgs::PointCloud2ConstPtr& lidar_msg, const sensor_ms
     }
 
 
+    ROS_INFO("lidar origin size: %d", lidar_cloud->size())
+    ROS_INFO("lidar pushed size: %d", lidar_count);
     ROS_INFO("radar size: %ld", radar_cloud->size());
-    ROS_INFO("lidar size: %d", lidar_count);
     ROS_INFO("merged size: %ld", merged_cloud->size());
+    ROS_INFO("/---------------------------------------");
     /**************************融合点云数据***************************/
 
 
@@ -110,7 +113,7 @@ int main(int argc, char** argv) {
     // 创建发布者，发布融合后的点云消息到radar_merged话题
     merged_pub = nh.advertise<sensor_msgs::PointCloud2>("/radar_merged", 1);
 
-    bag.open("/home/dearmoon/datasets/NWU/日雪不颠簸高速/enahancing/radar_lidar_output.bag", rosbag::bagmode::Write);
+    bag.open("/home/dearmoon/datasets/NWU/日雪不颠簸高速/enahancing/radar_lidar_ouput_5.bag", rosbag::bagmode::Write);
 
     // 订阅两个点云话题
     message_filters::Subscriber<sensor_msgs::PointCloud2> lidar_sub(nh, "/livox/lidar_PointCloud2", 10);

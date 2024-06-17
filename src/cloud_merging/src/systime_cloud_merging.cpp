@@ -40,7 +40,7 @@ int main(int argc, char** argv)
     ros::init(argc, argv, "time_sync_example_cpp");
     ros::NodeHandle nh;
 
-    output_bag.open("/home/dearmoon/datasets/NWU/日雪不颠簸高速/enahancing/radar_lidar_step1.bag", rosbag::bagmode::Write);
+    output_bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing_5/radar_lidar_step1.bag", rosbag::bagmode::Write);
    
     // 定义 radar 和 PointCloud2 的订阅者
     message_filters::Subscriber<sensor_msgs::PointCloud> radar_sub(nh, "/ars548_process/detection_point_cloud", 10);
