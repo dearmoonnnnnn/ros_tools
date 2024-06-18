@@ -9,16 +9,19 @@ int main(int argc, char** argv) {
 
     // 创建一个命令消息
     std_msgs::String command_msg;
-    command_msg.data = "time";  // point_distribution, output_aftmapped
+    command_msg.data = "output_aftmapped";  // 可以在这里更改为 "time", "point_distribution" 或 "output_aftmapped"
 
-    // 等待发布者和订阅者连接
-    ros::Duration(1.0).sleep();
+    // 设置发布频率
+    ros::Rate loop_rate(60);  // Hz
 
-    // 发布命令
-    command_pub.publish(command_msg);
-    ROS_INFO("Published command: %s", command_msg.data.c_str());
+    while (ros::ok()) {
+        // 发布命令
+        command_pub.publish(command_msg);
+        ROS_INFO("Published command: %s", command_msg.data.c_str());
 
-    ros::spinOnce();
+        ros::spinOnce();
+        loop_rate.sleep();  // 控制发送频率
+    }
 
     return 0;
 }
