@@ -37,7 +37,7 @@ void callback(const sensor_msgs::PointCloud2ConstPtr& lidar_msg, const sensor_ms
     pcl::PointCloud<pcl::PointXYZIDV>::Ptr radar_cloud(new pcl::PointCloud<pcl::PointXYZIDV>);
     pcl::PointCloud<pcl::PointXYZI>::Ptr lidar_cloud(new pcl::PointCloud<pcl::PointXYZI>);      // 激光雷达点云不包含多普勒速度，使用PointXYZI格式
 
-    // 将两个点云数据转换为pcl::PointCloud<pcl::PointXYZI>格式
+    // 将两个点云数据转换为pcl::PointCloud<T>格式
     pcl::fromROSMsg(*lidar_msg, *lidar_cloud);
     pcl::fromROSMsg(*radar_msg, *radar_cloud);
 
