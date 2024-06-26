@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
   std_msgs
+  message_filters
 )
 
 
@@ -116,7 +117,7 @@ catkin_package(
  INCLUDE_DIRS include
 #  LIBRARIES cloud_merging
  CATKIN_DEPENDS rosbag roscpp sensor_msgs std_msgs rosbag_tools
- DEPENDS system_lib
+ DEPENDS system_lib 
 )
 
 ###########
@@ -150,6 +151,8 @@ add_executable(systime_cloud_merging src/systime_cloud_merging.cpp)
 add_executable(toPointCloud2 src/toPointCloud2.cpp)
 add_executable(cloud_merging src/cloud_merging.cpp)
 
+add_executable(test_pub src/test_pub.cpp)
+add_executable(test_sub src/test_sub.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -176,6 +179,14 @@ target_link_libraries(toPointCloud2
 target_link_libraries(cloud_merging
   ${catkin_LIBRARIES} 
   ${OpenCV_LIBRARIES}
+)
+
+target_link_libraries(test_pub
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(test_sub
+  ${catkin_LIBRARIES}
 )
 
 #############

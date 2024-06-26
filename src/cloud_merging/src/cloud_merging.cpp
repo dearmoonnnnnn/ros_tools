@@ -113,7 +113,7 @@ int main(int argc, char** argv) {
     // 创建发布者，发布融合后的点云消息到radar_merged话题
     merged_pub = nh.advertise<sensor_msgs::PointCloud2>("/radar_merged", 1);
 
-    bag.open("/home/dearmoon/datasets/NWU/日雪不颠簸高速/enahancing/radar_lidar_ouput_5.bag", rosbag::bagmode::Write);
+    bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/radar_lidar_output_5.bag", rosbag::bagmode::Write);
 
     // 订阅两个点云话题
     message_filters::Subscriber<sensor_msgs::PointCloud2> lidar_sub(nh, "/livox/lidar_PointCloud2", 10);
@@ -123,6 +123,7 @@ int main(int argc, char** argv) {
     typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::PointCloud2, sensor_msgs::PointCloud2> MySyncPolicy;
     message_filters::Synchronizer<MySyncPolicy> sync(MySyncPolicy(32), lidar_sub, radar_sub);
     sync.registerCallback(boost::bind(&callback, _1, _2));
+    sync.setMaxIntervalDuration(ros::Duration(0.05));       // 设置最大时间间隔，单位秒
 
     ros::spin();
 
