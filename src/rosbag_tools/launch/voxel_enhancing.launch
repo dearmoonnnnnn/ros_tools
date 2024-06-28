@@ -1,5 +1,3 @@
-
-
 <!-- This launch file loads rosbags and makes an octomap file -->
 
 <launch>
@@ -8,12 +6,12 @@
 
 <node pkg="rosbag_tools" name="point_cloud_enhancement_node" type="voxel_enhancing"  output="screen"/>
 
-<!-- You can add any arguments here if needed -->
-<!-- paths to the rosbag files -->
-<arg name="path" default="/home/dearmoon/datasets/NWU/"/>
+    <!-- You can add any arguments here if needed -->
+    <!-- paths to the rosbag files -->
+    <arg name="path" default="/home/dearmoon/datasets/NWU/"/>   
 
-<arg name = "file_0" default = "/日晴半室内低速2/4DRadar/RiQingBanShiNeiDiSu3.bag"/>
-<arg name = "file_1" default = "TingCheChangDiSu.bag"/>
+    <arg name = "file_0" default = "/日晴半室内低速2/4DRadar/RiQingBanShiNeiDiSu3.bag"/>
+    <arg name = "file_1" default = "TingCheChangDiSu.bag"/>
 
 <!-- Plays the dataset. WARNING: changing 'rate' will cause interactions with the demo.  -->
 <!--  /radar_pcl /radar_trk -->

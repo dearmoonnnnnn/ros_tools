@@ -1,0 +1,38 @@
+<launch>
+<node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" />  
+
+<node pkg="rosbag_tools" type="precessing" name="precessing" output="screen">
+
+    <!-- distance filter -->
+    <param name="use_distance_filter" value="true" />
+    <param name="distance_near_thresh" value="2" />
+    <param name="distance_far_thresh" value="100.0" />
+    <param name="z_low_thresh" value="-100.0" />
+    <param name="z_high_thresh" value="100.0" />
+
+    <!-- NONE, VOXELGRID(0.1), or APPROX_VOXELGRID -->
+    <param name="downsample_method" value="VOXELGRID" />
+    <param name="downsample_resolution" value="0.1" />
+    <!-- NONE, RADIUS 2(initial 0.5 2), STATISTICAL, or BILATERAL -->
+    <param name="outlier_removal_method" value="RADIUS" />
+    <param name="statistical_mean_k" value="30" />
+    <param name="statistical_stddev" value="1.2" />
+    <param name="radius_radius" value="0.5" />
+    <param name="radius_min_neighbors" value="1" />
+    <param name="bilateral_sigma_s" value="5" />
+    <param name="bilateral_sigma_r" value="0.03" />
+    <!-- Power Filterring -->
+    <param name="power_threshold" value="0.0" />
+
+</node>
+
+<arg name = "bag_file" default="$(find rosbag_tools)/bag/test.bag" />
+
+<node pkg="rosbag" type="play" name="rosbag_play" 
+    args=" --clock --rate=3
+    $(arg bag_file)
+    
+    "/>
+
+
+</launch>
