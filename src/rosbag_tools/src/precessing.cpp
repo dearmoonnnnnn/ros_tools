@@ -2,7 +2,7 @@
 #include <pcl_ros/point_cloud.h>
 #include <sensor_msgs::PointCloud2.h>
 #include <pcl/filters/passthrough.h>
-
+#include <cloud_merging/include/point_xyzidv.h>
 
 // 参数初始化
 void initializeParams() {
@@ -278,12 +278,46 @@ pcl::PointCloud<PointT>::ConstPtr deskewing(const pcl::PointCloud<PointT>::Const
     return deskewed;
 }
 
+void cloud_callback(const sensor_msgs::PointCloud2::ConstPtr&  msg) { 
+    pcl::PointXYZIDV radarpoint_raw;            // 点，带有x、y、z、强度和多普勒速度信息
+    pcl::PointCloud<pcl::PointXYZIDV>::Ptr radarcloud_raw(new pcl::PointCloud<pcl::PointXYZIDV>());
+
+    // 遍历每一个点
+    pcl::PointCloud<pcl::PointXYZIDV> radarcloud_xyzidv;
+    pcl::fromROSMsg(*msg, radarcloud_xyzidv);
+
+    for(const auto& point : radarcloud_xyzidv)
+    {
+
+        if( point.intensity > power_threshold) //"Power"
+        {
+            // 检查点的坐标是否无效(NaN或无穷大)
+            if (point.x == NAN || point.y == NAN || point.z == NAN) continue;
+            if (point.x == INFINITY || point.y == INFINITY || point.z == INFINITY) continue;
+
+
+            // 对点进行赋值
+            radarpoint_raw.x = point.x;
+            radarpoint_raw.y = point.y;
+            radarpoint_raw.z = point.z;
+            radarpoint_raw.intensity = point.intensity;
+            radarpoint_raw.doppler = point.doppler_velocity;
+
+            // 将点添加到点云中
+            radarcloud_raw->points.push_back(radarpoint_raw);
+
+        }
+        
+    }
+
+}
 
 int main(int argc, char** argv){
     ros::init(argc, argv, "precessing");
     ros::NodeHandle nh;
 
-    
+    pointCloudTopic = nh.param<std::string>("point_cloud_topic", "/ars548_process/detection_point_cloud");
+    points_sub = nh.subscribe(pointCloudTopic, 64, &PreprocessingNodelet::cloud_callback, this);
 
 
 
