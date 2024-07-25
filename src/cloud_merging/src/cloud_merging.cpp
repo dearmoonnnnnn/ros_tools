@@ -22,7 +22,8 @@
 
 ros::Publisher merged_pub;
 rosbag::Bag bag;
-float distance_threshold = 5.0;  // 距离阈值，可以根据需要调整
+float distance_threshold = 1;  // 距离阈值，可以根据需要调整
+std::string bag_path = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/";
 
 typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::PointCloud2, sensor_msgs::PointCloud2> MySyncPolicy;
 cv::Mat Radar_to_Livox = (cv::Mat_<double>(4, 4) <<
@@ -119,7 +120,7 @@ int main(int argc, char** argv) {
     // 创建发布者，发布融合后的点云消息到radar_merged话题
     merged_pub = nh.advertise<sensor_msgs::PointCloud2>("/radar_merged", 1);
 
-    bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/radar_lidar_output_5.bag", rosbag::bagmode::Write);
+    bag.open(bag_path + "/radar_lidar_output_ " + std::to_string(distance_threshold) + ".bag", rosbag::bagmode::Write);
 
     // 订阅两个点云话题
     message_filters::Subscriber<sensor_msgs::PointCloud2> lidar_sub(nh, "/livox/lidar_PointCloud2", 10);
