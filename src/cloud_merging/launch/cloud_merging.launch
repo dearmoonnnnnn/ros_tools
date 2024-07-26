@@ -1,12 +1,16 @@
 <launch>
 
+<arg name = "path" default = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/" />
+<arg name = "file_0" default = "radar_lidar_step2.bag" />
 
 <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen"/>
-<node pkg="cloud_merging" name="cloud_merging" type="cloud_merging"  output="screen"/>"
 
+<node pkg="cloud_merging" name="cloud_merging" type="cloud_merging"  output="screen">
 
-<arg name = "path" default = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/" />
-<arg name = "file_0" default = "radar_lidar_step2" />
+    <param name="output_bag_path"  value = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/" />
+
+</node>
+
 
 <node pkg="rosbag" type="play" name="player" 
     args = " $(arg path)$(arg file_0) ">

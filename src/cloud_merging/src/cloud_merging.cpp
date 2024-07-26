@@ -12,6 +12,10 @@
 #include "point_xyzidv.h"
 
 
+#include <sstream>  // For std::ostringstream
+#include <iomanip>  // For std::fixed and std::setprecision
+#include <string>
+
 /*
  * step3:
  * cloud_merging.cpp
@@ -22,8 +26,7 @@
 
 ros::Publisher merged_pub;
 rosbag::Bag bag;
-float distance_threshold = 1;  // 距离阈值，可以根据需要调整
-std::string bag_path = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/";
+float distance_threshold = 1.0;  // 距离阈值，可以根据需要调整
 
 typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::PointCloud2, sensor_msgs::PointCloud2> MySyncPolicy;
 cv::Mat Radar_to_Livox = (cv::Mat_<double>(4, 4) <<
@@ -114,13 +117,21 @@ void callback(const sensor_msgs::PointCloud2ConstPtr& lidar_msg, const sensor_ms
 }
 
 int main(int argc, char** argv) {
-    ros::init(argc, argv, "point_cloud_merger");
+    ros::init(argc, argv, "cloud_merging");
     ros::NodeHandle nh;
+
+    /**** 根据 distance_threshold，命名输出 bag 文件，只保留整数部分 ****/
+    // std::string bag_path = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/";
+    std::string output_bag_path = nh.param<std::string>("output_bag_path", "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/");  
+    ROS_INFO("output_bag_path : %s", output_bag_path.c_str());
+    std::ostringstream output_bag;
+    output_bag << output_bag_path << "radar_lidar_output_" << std::fixed << std::setprecision(0) << distance_threshold << ".bag" ;
+    std::string output_str = output_bag.str();
 
     // 创建发布者，发布融合后的点云消息到radar_merged话题
     merged_pub = nh.advertise<sensor_msgs::PointCloud2>("/radar_merged", 1);
 
-    bag.open(bag_path + "/radar_lidar_output_ " + std::to_string(distance_threshold) + ".bag", rosbag::bagmode::Write);
+    bag.open(output_str, rosbag::bagmode::Write);
 
     // 订阅两个点云话题
     message_filters::Subscriber<sensor_msgs::PointCloud2> lidar_sub(nh, "/livox/lidar_PointCloud2", 10);
