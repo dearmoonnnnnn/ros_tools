@@ -122,7 +122,7 @@ int main(int argc, char** argv) {
 
     /**** 根据 distance_threshold，命名输出 bag 文件，只保留整数部分 ****/
     // std::string bag_path = "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/";
-    std::string output_bag_path = nh.param<std::string>("output_bag_path", "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/");  
+    std::string output_bag_path = nh.param<std::string>("/cloud_merging/output_bag_path", "/home/dearmoon/datasets/NWU/2222222/enhancing/");  
     ROS_INFO("output_bag_path : %s", output_bag_path.c_str());
     std::ostringstream output_bag;
     output_bag << output_bag_path << "radar_lidar_output_" << std::fixed << std::setprecision(0) << distance_threshold << ".bag" ;
