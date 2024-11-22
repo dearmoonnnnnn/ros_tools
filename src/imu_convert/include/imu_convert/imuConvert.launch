@@ -1,0 +1,10 @@
+<launch>
+
+    <!-- 参数设置 -->
+    <param name="input_file" value="/home/dearmoon/datasets/NWU/日雪不颠簸高速/imu/data34_time.txt" />
+    <param name="output_file" value="/home/dearmoon/datasets/NWU/日雪不颠簸高速/imu/imu_bag.bag" />
+
+    <!-- 启动 IMU 数据转换节点 -->
+    <node pkg="imu_convert" type="imu_txt_to_bag" name="imu_txt_to_bag_node" output="screen">
+    </node>
+</launch>

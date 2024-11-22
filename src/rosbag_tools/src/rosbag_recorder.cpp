@@ -22,6 +22,9 @@ void cloud_callback(const sensor_msgs::PointCloud::ConstPtr& msg) {
         std::cout << "radar timestamp : " << msg->header.stamp << std::endl;
         std::cout << "cloud_msg_count : " << cloud_msg_count << std::endl;
 
+        // 打印第一个点的信号强度，调试输出
+        // std::cout << "intensity : " << msg->channel[1].value[0] << std::endl;
+
         if (cloud_msg_count >= cloud_msg_count_max) {
             ROS_INFO("Stopping node as cloud_msg_count reached %d", cloud_msg_count_max);
             bag.close();                    // 关闭Bag文件
@@ -41,13 +44,13 @@ void imu_callback(const sensor_msgs::Imu::ConstPtr& msg) {
         std::cout << "imu_msg_count : " << imu_msg_count << std::endl;
     }
 }
-
+ 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "my_subscriber");
     ros::NodeHandle nh;
 
     // 打开Bag文件以写入
-    bag.open("/home/dearmoon/datasets/NWU/日雪不颠簸高速/4DRadar/xr.bag",  rosbag::bagmode::Write);
+    bag.open("/home/dearmoon/datasets/NWU/夜雪不颠簸高速/enhancing/yxbdbgs.bag",  rosbag::bagmode::Write);
     // 如果 cloud_msg_count 达到阈值，停止运行节点
 
  

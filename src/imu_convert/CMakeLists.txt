@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(cloud_merging)
+project(imu_convert)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,21 +8,11 @@ project(cloud_merging)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  rosbag_tools
-  geometry_msgs
-  pcl_ros
   rosbag
   roscpp
-  sensor_msgs
   std_msgs
-  message_filters
+  sensor_msgs
 )
-
-
-find_package(OpenCV REQUIRED)
-
-  
-
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -81,7 +71,7 @@ find_package(OpenCV REQUIRED)
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   sensor_msgs#   std_msgs
+#   sensor_msgs
 # )
 
 ################################################
@@ -114,10 +104,10 @@ find_package(OpenCV REQUIRED)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
- INCLUDE_DIRS include
-#  LIBRARIES cloud_merging
- CATKIN_DEPENDS rosbag roscpp sensor_msgs std_msgs rosbag_tools
- DEPENDS system_lib 
+#  INCLUDE_DIRS include
+#  LIBRARIES imu_convert
+  CATKIN_DEPENDS rosbag roscpp sensor_msgs
+  DEPENDS system_lib
 )
 
 ###########
@@ -127,15 +117,13 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-  src
-  include
+# include
   ${catkin_INCLUDE_DIRS}
-  ${OpenCV_INCLUDE_DIRS}
-  )
+)
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/cloud_merging.cpp
+#   src/${PROJECT_NAME}/imu_convert.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -146,15 +134,8 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/cloud_merging_node.cpp)
-add_executable(systime_cloud_merging src/systime_cloud_merging.cpp)
-add_executable(toPointCloud2 src/toPointCloud2.cpp)
-add_executable(cloud_merging src/cloud_merging.cpp)
-
-add_executable(test_pub src/test_pub.cpp)
-add_executable(test_sub src/test_sub.cpp)
-
-add_executable(PointCloud2_Parser src/PointCloud2_Parser.cpp)
+# add_executable(${PROJECT_NAME}_node src/imu_convert_node.cpp)
+add_executable(imu_txt_to_bag src/imuConvert.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -170,28 +151,8 @@ add_executable(PointCloud2_Parser src/PointCloud2_Parser.cpp)
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-target_link_libraries(systime_cloud_merging
-  ${catkin_LIBRARIES}
-)
 
-target_link_libraries(toPointCloud2
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(cloud_merging
-  ${catkin_LIBRARIES} 
-  ${OpenCV_LIBRARIES}
-)
-
-target_link_libraries(test_pub
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(test_sub
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(PointCloud2_Parser
+target_link_libraries(imu_txt_to_bag
   ${catkin_LIBRARIES}
 )
 
@@ -242,7 +203,7 @@ target_link_libraries(PointCloud2_Parser
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_cloud_merging.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_imu_convert.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

@@ -26,7 +26,7 @@
 
 ros::Publisher merged_pub;
 rosbag::Bag bag;
-float distance_threshold = 0;  // 距离阈值，可以根据需要调整
+float distance_threshold = 5.0;  // 距离阈值，可以根据需要调整
 
 typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::PointCloud2, sensor_msgs::PointCloud2> MySyncPolicy;
 cv::Mat Radar_to_Livox = (cv::Mat_<double>(4, 4) <<

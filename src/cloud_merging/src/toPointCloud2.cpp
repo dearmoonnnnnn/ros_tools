@@ -50,11 +50,12 @@ void pointcloudCallback(const sensor_msgs::PointCloudConstPtr& msg) {
         point_pcl.y = msg->points[i].y;
         point_pcl.z = msg->points[i].z;
         point_pcl.intensity = msg->channels[1].values[i];        // 添加强度信息
+        
         point_pcl.doppler_velocity = msg->channels[0].values[i]; // 多普勒速度信息
         radarCloud_pcl->points.push_back(point_pcl);    
     }
  
-    // 将 sensor_msgs::PointCloud 转换为 sensor_msgs::PointCloud2
+    // 将 pcl::PointCloud 转换为 sensor_msgs::PointCloud2
     pcl::toROSMsg(*radarCloud_pcl, pcl2_msg);
 
     pcl2_msg.header.stamp = msg->header.stamp; 
@@ -68,7 +69,7 @@ void pointcloudCallback(const sensor_msgs::PointCloudConstPtr& msg) {
      * sensor_msgs::PointCloud2强度信息调试输出
      */
 
-    if(0){
+    if(1){
         int intensity_offset = -1;
         for (const auto& field : pcl2_msg.fields)
         {
@@ -206,7 +207,7 @@ int main(int argc, char** argv) {
 
 
     // 打开新的 ROS bag 文件
-    output_bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/radar_lidar_step2.bag", rosbag::bagmode::Write);
+    output_bag.open("/home/dearmoon/test.bag", rosbag::bagmode::Write);
     // output_bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/one_msg_test_step2.bag", rosbag::bagmode::Write);
 
     // 订阅 sensor_msgs::PointCloud 和 livox_ros_driver::CustomMsg 话题，并设置回调函数
