@@ -20,8 +20,8 @@ class RegionGrowingNode {
 public:
     RegionGrowingNode() : nh_("~"){
         // 初始化订阅和发布
-        sub_millimeter_cloud_.subscribe(nh_, "/millimeter_cloud", 1);
-        sub_lidar_cloud_.subscribe(nh_, "/lidar_cloud", 1);
+        sub_millimeter_cloud_.subscribe(nh_, "/ars548_process/detectioin_PointCloud2", 1);
+        sub_lidar_cloud_.subscribe(nh_, "/livox/lidar_PointCloud2", 1);
         
         sync_.reset(new Sync(SyncPolicy(10), sub_millimeter_cloud_, sub_lidar_cloud_));
         sync_->registerCallback(boost::bind(&RegionGrowingNode::processClouds, this, _1, _2));

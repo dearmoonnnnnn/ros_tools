@@ -1,0 +1,27 @@
+<launch>
+
+<arg name="scene_0" default="日晴不颠簸低速3/"/>
+<arg name="scene_1" default="日雪不颠簸高速/"/>
+
+<!-- 用于拼接成文件路径 -->
+<arg name="path" default="/home/dearmoon/datasets/NWU/"/>
+<arg name="scene" default="$(arg scene_1)"/>
+
+<arg name="radarTopic" default="/ars548_process/detection_point_cloud"/>
+<arg name="lidarTopic" default="/livox/lidar"/>
+
+<node name="bagToPcd" pkg="rosbag_tools" type="bagToPcd" output="screen">
+    <param name="radarTopic" value="$(arg radarTopic)"/>
+    <param name="lidarTopic" value="$(arg lidarTopic)"/>
+    <param name="pcd_file_path" value="$(arg path)$(arg scene)enhancing/"/>
+</node>
+
+<node name="player" pkg="rosbag" type="play"
+    args="--clock
+    $(arg path)$(arg scene)enhancing/radar_lidar_step1.bag
+    --topic /livox/lidar "
+    >
+
+</node>
+
+</launch>

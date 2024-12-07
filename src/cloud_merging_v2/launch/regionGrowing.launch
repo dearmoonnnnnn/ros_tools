@@ -1,16 +1,19 @@
 <launch>
 
-<arg name="path" default="/home/dearmoon/datasets/NWU/日晴不颠簸低速3/"/>
-<arg name="inputFile" default="enhancing/radar_lidar_step2.bag"/>
+<arg name="path" default="/home/dearmoon/datasets/NWU/"/>
 
+<arg name="scene_0" default="日晴不颠簸低速3"/>
+<arg name="scene_1" default="日雪不颠簸高速"/>
+
+<arg name="scene" default="$(arg scene_1)"/>
 
 <node name="regionGrowing" pkg="cloud_merging_v2" type="regionGrowing" output="screen">
-    <param name="outputFile" value="/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing_v2/regionGrowingResult.bag"/>
+    <param name="outputFile" value="$(arg path)$(arg scene)/enhancing_v2/regionGrowingResult.bag"/>
 </node>
 
 <node name="player" type="play" pkg="rosbag"
     args="--clock 
-    $(arg path)$(arg inputFile)"
+    $(arg path)$(arg scene)/enhancing/radar_lidar_step2.bag"
     >
 </node>
 
