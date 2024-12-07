@@ -15,11 +15,12 @@
  * 验证 sensor_msg::PointCloud2 数据字段
  */
 
+bool flag = true;
 
 void callback(const sensor_msgs::PointCloud2::ConstPtr& raw_msg){
 
     // 检查 sensor_msgs::PointCloud2 字段定义
-    if (1){
+    if (0){
 
         std::cout << "--------------- 开始：检查字段定义 --------------- " << std::endl;
         for (const auto& field : raw_msg->fields) {
@@ -32,7 +33,7 @@ void callback(const sensor_msgs::PointCloud2::ConstPtr& raw_msg){
 
     // 转换为 pcl::PointCloud<T> 后， 获取每个字段。
     // 失败：多普勒速度和信号强度均为 0 
-    if(0){
+    if (0){
         std::cout << "--------------- 开始：转换为 pcl::PointCloud<T> 后解析 --------------- " << std::endl;
         pcl::PointCloud<pcl::PointXYZIDV>::Ptr pcl_pointcloud(new pcl::PointCloud<pcl::PointXYZIDV>);
 
@@ -57,11 +58,13 @@ void callback(const sensor_msgs::PointCloud2::ConstPtr& raw_msg){
 
         // // 打印字段列表
         // ROS_INFO("PCL fields: %s", fields_list.c_str());
+
+        // flag = false;
     }
 
     // 4DRadarSLAM 中的解析方法，同样转换为 pcl::PointCloud<T>
     // 失败: 多普勒速度和信号强度均为 0 
-    if(0)
+    if (1)
     {   
         auto radar_scan(new pcl::PointCloud<pcl::PointXYZIDV>);
         pcl::fromROSMsg (*raw_msg, *radar_scan);
@@ -70,6 +73,7 @@ void callback(const sensor_msgs::PointCloud2::ConstPtr& raw_msg){
             const auto target = radar_scan->at(i);
             ROS_INFO("4DRadarSLAM method , radar_scan->at(%u) : intensity=%f, doppler velocity=%f", i, target.intensity, target.doppler_velocity);
         }
+        // flag = false;
     }
 
     // 手动解析 pointcloud2 字段值
@@ -91,6 +95,7 @@ void callback(const sensor_msgs::PointCloud2::ConstPtr& raw_msg){
         }
 
         std::cout << "--------------- 结束：手动解析 pointcloud2 字段值 --------------- " << std::endl;
+
     }
 }
 

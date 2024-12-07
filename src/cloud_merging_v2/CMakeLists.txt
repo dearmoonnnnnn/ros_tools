@@ -204,11 +204,11 @@ include_directories(
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
 
-# add_executable(regionGrowing src/regionGrowing.cpp)
+add_executable(regionGrowing src/regionGrowing.cpp)
 
-# target_link_libraries(regionGrowing
-#   $(catkin_LIBRARIES)
-# )
+target_link_libraries(regionGrowing
+  ${catkin_LIBRARIES}
+)
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
