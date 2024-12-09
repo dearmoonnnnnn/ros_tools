@@ -21,7 +21,6 @@
     $(arg path)$(arg scene)enhancing/radar_lidar_step1.bag
     --topic /livox/lidar "
     >
-
 </node>
 
 </launch>
