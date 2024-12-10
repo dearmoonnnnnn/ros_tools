@@ -79,7 +79,11 @@ private:
         kdtree.setInputCloud(lidar_cloud);
 
         // 遍历毫米波点云，找到种子点并执行区域生长
-        for (const auto& seed_point : millimeter_cloud->points) {
+        for (const auto& radar_point : millimeter_cloud->points) {
+            // 将毫米波点云点转换到激光雷达坐标系
+            pcl::PointXYZI seed_point;
+            transformRadarToLidar(radar_point, seed_point);
+            
             std::queue<int> seed_queue;
             std::vector<bool> processed(lidar_cloud->size(), false);
 
@@ -135,6 +139,26 @@ private:
                                    std::pow(seed.z - neighbor.z, 2));
         return (distance < max_distance && std::abs(seed.intensity - neighbor.intensity) < max_intensity_diff);
     }
+
+    void transformRadarToLidar(const pcl::PointXYZI& radar_point, pcl::PointXYZI& lidar_point) {
+        // 定义变换矩阵
+        static cv::Mat radar_to_lidar = Radar_to_Livox;
+
+        // 构建齐次坐标点
+        cv::Mat radar_point_mat = (cv::Mat_<double>(4, 1) <<
+            radar_point.x, radar_point.y, radar_point.z, 1.0);
+
+        // 执行变换
+        cv::Mat lidar_point_mat = radar_to_lidar * radar_point_mat;
+
+        // 提取结果
+        lidar_point.x = lidar_point_mat.at<double>(0, 0);
+        lidar_point.y = lidar_point_mat.at<double>(1, 0);
+        lidar_point.z = lidar_point_mat.at<double>(2, 0);
+        lidar_point.intensity = radar_point.intensity;  // 保留强度信息
+}
+
+
 };
 
 int main(int argc, char** argv) {
