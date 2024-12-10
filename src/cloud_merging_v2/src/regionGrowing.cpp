@@ -10,6 +10,19 @@
 #include <message_filters/synchronizer.h>
 #include <message_filters/sync_policies/approximate_time.h>
 #include <rosbag/bag.h>
+#include <opencv2/opencv.hpp>
+
+cv::Mat Radar_to_Livox = (cv::Mat_<double>(4, 4) <<
+ 0.994838, 0.0187061, -0.0997379, -0.0379673, 
+ -0.0209378, 0.999552, -0.0213763, -0.120289,
+ 0.0992934, 0.0233543, 0.994784, 0.41831,
+ 0,  0,  0,  1);
+
+cv::Mat livox_to_Radar = (cv::Mat_<double>(4, 4) <<
+ 0.994838,  -0.0209378,  0.0992934, -0.0062827,
+ 0.0187061,  0.999552,   0.0233543,  0.11117599,
+ -0.0997379, -0.0213763, 0.994784, -0.42248621,
+  0,       0,        0,         1);       
 
 
 // 参数设置
