@@ -33,7 +33,7 @@ void callback(const sensor_msgs::PointCloud2::ConstPtr& raw_msg){
 
     // 转换为 pcl::PointCloud<T> 后， 获取每个字段。
     // 所有字段解析正确
-    if (1){
+    if (0){
         std::cout << "--------------- 开始：转换为 pcl::PointCloud<T> 后解析 --------------- " << std::endl;
         pcl::PointCloud<pcl::PointXYZIDV>::Ptr pcl_pointcloud(new pcl::PointCloud<pcl::PointXYZIDV>);
 
@@ -78,7 +78,7 @@ void callback(const sensor_msgs::PointCloud2::ConstPtr& raw_msg){
 
     // 手动解析 pointcloud2 字段值
     // 结果：所有字段解析正确
-    if (0){    
+    if (1){    
         std::cout << "--------------- 开始：手动解析 pointcloud2 字段值 --------------- " << std::endl;
         const uint8_t* data_ptr = raw_msg->data.data();
         for (size_t i = 0; i < raw_msg->width; ++i) {
