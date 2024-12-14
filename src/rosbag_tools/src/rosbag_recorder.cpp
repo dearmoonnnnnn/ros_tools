@@ -53,11 +53,8 @@ int main(int argc, char **argv) {
     bag.open("/home/dearmoon/datasets/NWU/夜雪不颠簸高速/enhancing/yxbdbgs.bag",  rosbag::bagmode::Write);
     // 如果 cloud_msg_count 达到阈值，停止运行节点
 
- 
     ros::Subscriber sub_radar = nh.subscribe<sensor_msgs::PointCloud>("/ars548_process/detection_point_cloud", 10, cloud_callback);
     ros::Subscriber sub_imu = nh.subscribe<sensor_msgs::Imu>("/livox/imu", 10, imu_callback);
-
-    
 
     ros::spin(); // 进入ROS主循环，等待消息
 

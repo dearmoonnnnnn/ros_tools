@@ -32,8 +32,8 @@ void callback(const sensor_msgs::PointCloud2::ConstPtr& raw_msg){
 
 
     // 转换为 pcl::PointCloud<T> 后， 获取每个字段。
-    // 失败：多普勒速度和信号强度均为 0 
-    if (0){
+    // 所有字段解析正确
+    if (1){
         std::cout << "--------------- 开始：转换为 pcl::PointCloud<T> 后解析 --------------- " << std::endl;
         pcl::PointCloud<pcl::PointXYZIDV>::Ptr pcl_pointcloud(new pcl::PointCloud<pcl::PointXYZIDV>);
 
@@ -63,8 +63,8 @@ void callback(const sensor_msgs::PointCloud2::ConstPtr& raw_msg){
     }
 
     // 4DRadarSLAM 中的解析方法，同样转换为 pcl::PointCloud<T>
-    // 失败: 多普勒速度和信号强度均为 0 
-    if (1)
+    // 所有字段解析正确
+    if (0)
     {   
         auto radar_scan(new pcl::PointCloud<pcl::PointXYZIDV>);
         pcl::fromROSMsg (*raw_msg, *radar_scan);
@@ -77,6 +77,7 @@ void callback(const sensor_msgs::PointCloud2::ConstPtr& raw_msg){
     }
 
     // 手动解析 pointcloud2 字段值
+    // 结果：所有字段解析正确
     if (0){    
         std::cout << "--------------- 开始：手动解析 pointcloud2 字段值 --------------- " << std::endl;
         const uint8_t* data_ptr = raw_msg->data.data();
@@ -103,7 +104,8 @@ int main(int argc, char** argv){
     ros::init(argc, argv, "test_sensor_msg_PointCloud2");
     ros::NodeHandle nh;
 
-    ros::Subscriber pointcloud_sub = nh.subscribe("/radar_merged", 10, callback);
+    // ros::Subscriber pointcloud_sub = nh.subscribe("/radar_merged", 10, callback);
+    ros::Subscriber pointcloud_sub = nh.subscribe("/eagle_data/pc2_raw", 10, callback);
 
     ros::spin();
 
