@@ -4,6 +4,12 @@
 #include <pcl/point_types.h>
 #include <rosbag_tools/CustomMsg.h>
 
+
+/*
+ * 转换 sensor_msgs::PointCloud 和 CustomMsg
+ * 若消息类型为 sensor_msgs::PointCloud2, 直接使用 ros 命令: rosrun pcl_ros pointcloud_to_pcd input:=/my_topic
+ */
+
 ros::Publisher pub;
 static int radar_frame_count = 0; // 添加静态变量记录帧序号
 static int lidar_frame_count = 0;

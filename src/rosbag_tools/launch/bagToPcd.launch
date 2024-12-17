@@ -5,7 +5,7 @@
 
 <!-- 用于拼接成文件路径 -->
 <arg name="path" default="/home/dearmoon/datasets/NWU/"/>
-<arg name="scene" default="$(arg scene_1)"/>
+<arg name="scene" default="$(arg scene_0)"/>
 
 <arg name="radarTopic" default="/ars548_process/detection_point_cloud"/>
 <arg name="lidarTopic" default="/livox/lidar"/>

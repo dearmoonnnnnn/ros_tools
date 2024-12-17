@@ -1,0 +1,37 @@
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz/TF
+      Enabled: true
+      Name: TF
+      Value: true
+    - Class: rviz/Grid
+      Cell Size: 1
+      Enabled: true
+      Line Style: Lines
+      Name: Grid
+      Reference Frame: <Fixed Frame>
+    - Class: rviz/PointCloud2
+      Enabled: true
+      Name: Cloud2 (Green)
+      Topic: /cloud2
+      Color Transformer: FlatColor
+      Alpha: 1.0
+      Flat Color: [0, 255, 0] # 绿色
+      Size (m): 0.01
+    - Class: rviz/PointCloud2
+      Enabled: true
+      Name: Transformed Cloud1 (Red)
+      Topic: /transformed_cloud1
+      Color Transformer: FlatColor
+      Alpha: 1.0
+      Flat Color: [255, 0, 0] # 红色
+      Size (m): 0.01
+  Global Options:
+    Background Color: [0, 0, 0] # 黑色背景
+    Fixed Frame: map
+  Tools:
+    - Class: rviz/Interact
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+  Value: true

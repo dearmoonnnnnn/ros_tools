@@ -16,6 +16,8 @@ find_package(catkin REQUIRED COMPONENTS
   pcl_ros
 )
 
+find_package(OpenCV REQUIRED)
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -122,6 +124,7 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -143,6 +146,7 @@ add_executable(bagToPcd src/bagToPcd.cpp)
 add_executable(voxel_enhancing src/voxel_enhancing.cpp)
 add_executable(bag_merging src/bag_merging.cpp)
 add_executable(stringMsgSender src/stringMsgSender.cpp)
+add_executable(calibration_test src/calibration_test.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -176,6 +180,11 @@ target_link_libraries(bag_merging
 
 target_link_libraries(stringMsgSender
   ${catkin_LIBRARIES}  
+)
+
+target_link_libraries(calibration_test
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
 )
 
 #############

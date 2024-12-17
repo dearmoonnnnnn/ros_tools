@@ -153,7 +153,7 @@ void pointcloudCallback(const sensor_msgs::PointCloudConstPtr& msg) {
     }
 
     // 将转换后的消息写入新的 ROS bag 文件
-    output_bag.write("/ars548_process/detectioin_PointCloud2", pcl2_msg.header.stamp, pcl2_msg);
+    output_bag.write("/ars548_process/detection_PointCloud2", pcl2_msg.header.stamp, pcl2_msg);
     // pcl2_pub.publish(pcl2_msg);
 
     // ROS_INFO("radar timestamp: %f", pcl2_msg->header.stamp.toSec());
