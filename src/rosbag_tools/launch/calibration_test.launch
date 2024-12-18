@@ -1,17 +1,18 @@
 <launch>
-    <!-- 发布原始点云2 -->
-    <node pkg="pcl_ros" type="pcd_to_pointcloud" name="cloud2_publisher" output="screen">
-        <param name="frame_id" value="map"/>
-        <param name="file_name" value="/home/dearmoon/datasets/one_msg/lidar_step2.pcd"/>
-        <remap from="output" to="/cloud2"/>
+    <node name="cloud2_publisher_manual" pkg="pcl_ros" type="pcd_to_pointcloud"
+          args="_file_name:=/home/dearmoon/datasets/one_msg/lidar_step2.pcd _frame_id:=map"
+          respawn="true"
+          respawn_delay="1.0" >
+        
     </node>
 
     <!-- 发布点云1 -->
-    <node pkg="pcl_ros" type="pcd_to_pointcloud" name="cloud1_publisher" output="screen">
+    <!-- <node pkg="pcl_ros" type="pcd_to_pointcloud" name="cloud1_publisher" output="screen">
         <param name="frame_id" value="map"/>
         <param name="file_name" value="/home/dearmoon/datasets/one_msg/radar_step2.pcd"/>
-        <remap from="output" to="/cloud1"/>
-    </node>
+        <param name="rate" value="10"/>
+        <remap from="/cloud_pcd" to="/cloud1"/>
+    </node> -->
 
     <!-- 运行转换节点 -->
     <node pkg="rosbag_tools" type="calibration_test" name="calibration_test" output="screen"/>
