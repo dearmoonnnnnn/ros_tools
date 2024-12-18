@@ -17,7 +17,7 @@ Eigen::Matrix4f transform; // 转换矩阵
 void cloud1Callback(const sensor_msgs::PointCloud2ConstPtr& cloud_msg) {
     ROS_INFO("cloud1Callback called");
     // 输入点云
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_in(new pcl::PointCloud<pcl::PointXYZ>);
+    pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_in(new pcl::PointCloud<pcl::PointXYZI>);
     pcl::fromROSMsg(*cloud_msg, *cloud_in);
 
     // 转换后的点云

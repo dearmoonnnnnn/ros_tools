@@ -59,7 +59,7 @@ Visualization Manager:
       Axis: Z
       Channel Name: intensity
       Class: rviz/PointCloud2
-      Color: 255; 255; 255
+      Color: 239; 41; 41
       Color Transformer: FlatColor
       Decay Time: 0
       Enabled: true
@@ -67,7 +67,7 @@ Visualization Manager:
       Max Color: 255; 255; 255
       Min Color: 0; 0; 0
       Name: Cloud2 (Green)
-      Position Transformer: ""
+      Position Transformer: XYZ
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
@@ -122,7 +122,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 10
+      Distance: 13.257355690002441
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -130,17 +130,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: 0.327521950006485
+        Y: 0.14415213465690613
+        Z: 2.035551071166992
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.16479648649692535
+      Pitch: 0.13479651510715485
       Target Frame: <Fixed Frame>
-      Yaw: 0.5053982734680176
+      Yaw: 2.9204134941101074
     Saved: ~
 Window Geometry:
   Displays:
@@ -151,4 +151,4 @@ Window Geometry:
   QMainWindow State: 000000ff00000000fd0000000100000000000001560000021afc0200000001fb000000100044006900730070006c006100790073010000003d0000021a000000c900ffffff000002080000021a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Width: 868
   X: 110
-  Y: 65
+  Y: 28
