@@ -26,8 +26,9 @@ cv::Mat livox_to_Radar = (cv::Mat_<double>(4, 4) <<
 
 
 // 参数设置
-const float max_distance = 1.0;  // 邻域搜索的最大距离
-const float max_intensity_diff = 10.0;  // 强度差阈值
+const float radar_to_lidar_distance = 4.0;  // 激光种子点与毫米波点的最大距离 
+const float max_distance = 1.0;             // 邻域搜索的最大距离
+const float max_intensity_diff = 10.0;      // 强度差阈值
 
 class RegionGrowingNode {
 public:
@@ -95,7 +96,7 @@ private:
 
             // 将符合条件的点加入种子队列
             for (int idx : neighbor_indices) {
-                if (!processed[idx] && canGrow(seed_point, lidar_cloud->points[idx])) {
+                if (!processed[idx] && canGrow(seed_point, lidar_cloud->points[idx], true)) {
                     seed_queue.push(idx);
                 }
             }
@@ -133,12 +134,18 @@ private:
         ROS_INFO("Region growing completed!");
     }
 
-    bool canGrow(const pcl::PointXYZI& seed, const pcl::PointXYZI& neighbor) {
+    bool canGrow(const pcl::PointXYZI& seed, const pcl::PointXYZI& neighbor, bool is_initial_search = false) {
         float distance = std::sqrt(std::pow(seed.x - neighbor.x, 2) +
-                                   std::pow(seed.y - neighbor.y, 2) +
-                                   std::pow(seed.z - neighbor.z, 2));
-        return (distance < max_distance && std::abs(seed.intensity - neighbor.intensity) < max_intensity_diff);
+                                std::pow(seed.y - neighbor.y, 2) +
+                                std::pow(seed.z - neighbor.z, 2));
+        if (is_initial_search) {
+            return distance < max_distance;  // 初次搜索只考虑距离
+        } else {
+            return (distance < max_distance && 
+                    std::abs(seed.intensity - neighbor.intensity) < max_intensity_diff);  // 后续搜索考虑强度
+        }
     }
+
 
     void transformRadarToLidar(const pcl::PointXYZI& radar_point, pcl::PointXYZI& lidar_point) {
         // 定义变换矩阵
@@ -156,7 +163,7 @@ private:
         lidar_point.y = lidar_point_mat.at<double>(1, 0);
         lidar_point.z = lidar_point_mat.at<double>(2, 0);
         lidar_point.intensity = radar_point.intensity;  // 保留强度信息
-}
+    }
 
 
 };

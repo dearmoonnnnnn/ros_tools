@@ -207,7 +207,7 @@ int main(int argc, char** argv) {
 
 
     // 打开新的 ROS bag 文件
-    output_bag.open("/home/dearmoon/test.bag", rosbag::bagmode::Write);
+    output_bag.open("/home/dearmoon/datasets/NWU/日雪不颠簸高速/one_msg/lidar_input_front_pc2.bag", rosbag::bagmode::Write);
     // output_bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/one_msg_test_step2.bag", rosbag::bagmode::Write);
 
     // 订阅 sensor_msgs::PointCloud 和 livox_ros_driver::CustomMsg 话题，并设置回调函数

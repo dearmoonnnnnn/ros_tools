@@ -15,9 +15,9 @@ Eigen::Matrix4f transform; // 转换矩阵
 
 // 点云转换回调函数
 void cloud1Callback(const sensor_msgs::PointCloud2ConstPtr& cloud_msg) {
-    ROS_INFO("cloud1Callback called");
+    ROS_INFO("cloud1 callback called");
     // 输入点云
-    pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_in(new pcl::PointCloud<pcl::PointXYZI>);
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_in(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::fromROSMsg(*cloud_msg, *cloud_in);
 
     // 转换后的点云
@@ -45,7 +45,9 @@ int main(int argc, char** argv) {
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
             transform(i, j) = static_cast<float>(Radar_to_Livox.at<double>(i, j));
+            std::cout << transform(i, j) << " ";
         }
+        std::cout << std::endl;
     }
 
     // 订阅原始点云1话题

@@ -7,7 +7,7 @@ Panels:
         - /Cloud2 (Green)1
         - /Transformed Cloud1 (Red)1
       Splitter Ratio: 0.5
-    Tree Height: 407
+    Tree Height: 795
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -71,7 +71,7 @@ Visualization Manager:
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.009999999776482582
+      Size (m): 0.07999999821186066
       Style: Flat Squares
       Topic: /cloud2
       Unreliable: false
@@ -81,13 +81,13 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
+        Max Value: 74.27037811279297
+        Min Value: -18.632726669311523
         Value: true
       Axis: Z
       Channel Name: intensity
       Class: rviz/PointCloud2
-      Color: 255; 255; 255
+      Color: 252; 233; 79
       Color Transformer: FlatColor
       Decay Time: 0
       Enabled: true
@@ -95,11 +95,11 @@ Visualization Manager:
       Max Color: 255; 255; 255
       Min Color: 0; 0; 0
       Name: Transformed Cloud1 (Red)
-      Position Transformer: ""
+      Position Transformer: XYZ
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.009999999776482582
+      Size (m): 0.20000000298023224
       Style: Flat Squares
       Topic: /transformed_cloud1
       Unreliable: false
@@ -122,7 +122,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 13.257355690002441
+      Distance: 28.583208084106445
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -130,25 +130,25 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.327521950006485
-        Y: 0.14415213465690613
-        Z: 2.035551071166992
+        X: 8.693194389343262
+        Y: -2.871420383453369
+        Z: 6.515532493591309
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.13479651510715485
+      Pitch: 0.24479854106903076
       Target Frame: <Fixed Frame>
-      Yaw: 2.9204134941101074
+      Yaw: 2.955441951751709
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 628
+  Height: 1016
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd0000000100000000000001560000021afc0200000001fb000000100044006900730070006c006100790073010000003d0000021a000000c900ffffff000002080000021a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
-  Width: 868
-  X: 110
-  Y: 28
+  QMainWindow State: 000000ff00000000fd0000000100000000000001560000039efc0200000001fb000000100044006900730070006c006100790073010000003d0000039e000000c900ffffff000005dc0000039e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Width: 1848
+  X: 72
+  Y: 27

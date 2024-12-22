@@ -1,6 +1,12 @@
 <launch>
+    <arg name="scene_0" default="日晴不颠簸低速3"/>
+    <arg name="scene_1" default="日雪不颠簸高速"/>
+    <arg name="lidar_file_0" default="lidar_step2.pcd"/>
+    <arg name="lidar_file_1" default="lidar_input_front.pcd"/>
+    <arg name="lidar_file_2" default="lidar_step2_mid.pcd"/>
+
     <node name="cloud2_publisher" pkg="pcl_ros" type="pcd_to_pointcloud">
-        <param name="file_name" value="/home/dearmoon/datasets/one_msg/lidar_step2.pcd"/>
+        <param name="file_name" value="/home/dearmoon/datasets/NWU/$(arg scene_1)/one_msg/$(arg lidar_file_2)"/>
         <param name="frame_id" value="map"/>
         <param name="interval" value="1.0"/>
         <param name="latch" value="true"/>
@@ -8,9 +14,9 @@
     </node>
 
 
-    <!-- 发布点云1 -->
+    <!-- 发布点云 1， 点云 1 用于坐标转换 -->
     <node name="cloud1_publisher" pkg="pcl_ros" type="pcd_to_pointcloud">
-        <param name="file_name" value="/home/dearmoon/datasets/one_msg/radar_step2.pcd"/>
+        <param name="file_name" value="/home/dearmoon/datasets/NWU/$(arg scene_1)/one_msg/radar_step2.pcd"/>
         <param name="frame_id" value="map"/>
         <param name="interval" value="1.0"/>
         <param name="latch" value="true"/>
