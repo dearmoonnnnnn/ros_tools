@@ -79,6 +79,8 @@ private:
         pcl::KdTreeFLANN<pcl::PointXYZI> kdtree;
         kdtree.setInputCloud(lidar_cloud);
 
+        std::vector<bool> processed(lidar_cloud->size(), false);
+
         // 遍历毫米波点云，找到种子点并执行区域生长
         for (const auto& radar_point : millimeter_cloud->points) {
             // 将毫米波点云点转换到激光雷达坐标系
@@ -86,7 +88,6 @@ private:
             transformRadarToLidar(radar_point, seed_point);
             
             std::queue<int> seed_queue;
-            std::vector<bool> processed(lidar_cloud->size(), false);
 
             // 查找种子点邻域
             std::vector<int> neighbor_indices;

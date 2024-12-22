@@ -146,7 +146,7 @@ add_executable(bagToPcd src/bagToPcd.cpp)
 add_executable(voxel_enhancing src/voxel_enhancing.cpp)
 add_executable(bag_merging src/bag_merging.cpp)
 add_executable(stringMsgSender src/stringMsgSender.cpp)
-add_executable(calibration_test src/calibration_test.cpp)
+add_executable(calibration_displayer src/calibration_displayer.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -182,7 +182,7 @@ target_link_libraries(stringMsgSender
   ${catkin_LIBRARIES}  
 )
 
-target_link_libraries(calibration_test
+target_link_libraries(calibration_displayer
   ${catkin_LIBRARIES}
   ${OpenCV_LIBRARIES}
 )
