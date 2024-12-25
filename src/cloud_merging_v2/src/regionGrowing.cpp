@@ -93,7 +93,10 @@ private:
             std::vector<int> neighbor_indices;
             std::vector<float> neighbor_distances;
 
-            kdtree.radiusSearch(seed_point, max_distance, neighbor_indices, neighbor_distances);
+            if (kdtree.radiusSearch(seed_point, radar_to_lidar_distance, neighbor_indices, neighbor_distances) == 0){
+                // ROS_INFO("No lidar seeds found");
+                continue;
+            }
 
             // 将符合条件的点加入种子队列
             for (int idx : neighbor_indices) {

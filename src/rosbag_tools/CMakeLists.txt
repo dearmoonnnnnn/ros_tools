@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rosbag
   pcl_ros
+  livox_ros_driver
 )
 
 find_package(OpenCV REQUIRED)
@@ -111,7 +112,7 @@ generate_messages(
 catkin_package(
 # INCLUDE_DIRS include
 #  LIBRARIES rosbag_recorder
- CATKIN_DEPENDS roscpp sensor_msgs 
+ CATKIN_DEPENDS roscpp sensor_msgs rosbag livox_ros_driver
  DEPENDS system_lib
 )
 
@@ -147,6 +148,7 @@ add_executable(voxel_enhancing src/voxel_enhancing.cpp)
 add_executable(bag_merging src/bag_merging.cpp)
 add_executable(stringMsgSender src/stringMsgSender.cpp)
 add_executable(calibration_displayer src/calibration_displayer.cpp)
+add_executable(pc2ToCustomMsg src/pc2ToCustomMsg.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -185,6 +187,10 @@ target_link_libraries(stringMsgSender
 target_link_libraries(calibration_displayer
   ${catkin_LIBRARIES}
   ${OpenCV_LIBRARIES}
+)
+
+target_link_libraries(pc2ToCustomMsg
+  ${catkin_LIBRARIES}
 )
 
 #############

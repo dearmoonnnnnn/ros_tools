@@ -5,9 +5,9 @@
 <arg name="path" default="/home/dearmoon/datasets/NWU/"/>
 
 <arg name="scene_0" default="日晴不颠簸低速3"/>
-<arg name="scene_1" default="日雪不颠簸高速"/>
+<arg name="scene_1" default="日雪不颠簸高速"/>  <!-- 这里播放的包应该为 step21 -->
 
-<arg name="scene" default="$(arg scene_0)"/>
+<arg name="scene" default="$(arg scene_1)"/>
 
 <node name="regionGrowing" pkg="cloud_merging_v2" type="regionGrowing" output="screen">
     <param name="outputFile" value="$(arg path)$(arg scene)/enhancing_v2/regionGrowingResult.bag"/>
@@ -15,7 +15,7 @@
 
 <node name="player" type="play" pkg="rosbag"
     args="--clock 
-    $(arg path)$(arg scene)/enhancing/radar_lidar_step2.bag"
+    $(arg path)$(arg scene)/enhancing/radar_lidar_step21.bag"
     >
 </node>
 

@@ -4,13 +4,13 @@
 #include "std_msgs/String.h"
 
 /* 
- * 将两个bag包合并成一个新的bag包
+ * 将两个 bag 包合并成一个新的 bag 包
 */
 
 int main(int argc, char** argv) {
     // 初始化ROS节点
     ros::init(argc, argv, "bag_merger");
-    ros::NodeHandle nh;
+    ros::NodeHandle nh("~");
 
     int radar_count = 0;
     int lidar_count = 0;
@@ -19,14 +19,21 @@ int main(int argc, char** argv) {
 
     // 从ROS参数服务器获取输入bag文件的路径和输出bag文件的路径
     std::string bag1_path, bag2_path, output_bag_path;
-    bag1_path = "/home/dearmoon/datasets/NWU/日雪不颠簸高速/4DRadar/xr.bag";
-    bag2_path = "/home/dearmoon/datasets/NWU/日雪不颠簸高速/bdbxr.bag";
-    output_bag_path = "/home/dearmoon/datasets/NWU/日雪不颠簸高速/radar_lidar.bag";
+    if (!nh.getParam("input_bag1", bag1_path)){
+        ROS_ERROR("Failed to get 'input_bag1' parameter");
+        return -1;
+    }
 
-    // nh.param<std::string>("bag1_path", bag1_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/4DRadar/RiQingBuDianBoDiSu3.bag");   // Radar
-    // nh.param<std::string>("bag2_path", bag2_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/3.bag");                             // IMU
-    // nh.param<std::string>("output_bag_path", output_bag_path, "/home/dearmoon/datasets/NWU/日晴不颠簸低速3/imu_4DRadar.bag");
+    if (!nh.getParam("input_bag2", bag2_path)){
+        ROS_ERROR("Failed to get 'input_bag2' parameter");
+        return -1;
+    }
 
+    if (!nh.getParam("output_bag", output_bag_path)){
+        ROS_ERROR("Failed to get 'output_bag' parameter");
+        return -1;
+    }   
+        
     // 打开输入bag文件和输出bag文件
     rosbag::Bag bag1(bag1_path, rosbag::bagmode::Read);
     std::cout << "bag1_path: " << bag1_path << std::endl;
@@ -40,8 +47,12 @@ int main(int argc, char** argv) {
     // 创建一个Topic过滤器，选择需要保留的所有话题
     // rosbag::View view1(bag1, rosbag::TopicQuery("/a1") || rosbag::TopicQuery("/a2") || rosbag::TopicQuery("/a3"));
     // rosbag::View view2(bag2, rosbag::TopicQuery("/b1") || rosbag::TopicQuery("/b2"));
-    rosbag::View view1(bag1, rosbag::TopicQuery("/ars548_process/detection_point_cloud"));
-    rosbag::View view2(bag2, rosbag::TopicQuery("/livox/lidar") );
+
+    std::vector<std::string> topics_bag1 = {"/livox/imu", "/color/compressed"};
+    std::vector<std::string> topics_bag2 = {"/livox/lidar"};
+
+    rosbag::View view1(bag1, rosbag::TopicQuery(topics_bag1));
+    rosbag::View view2(bag2, rosbag::TopicQuery("/livox/lidar"));
 
     // 循环读取输入bag文件中的消息并写入输出bag文件
     for (const rosbag::MessageInstance& msg : view1) {
@@ -70,8 +81,8 @@ int main(int argc, char** argv) {
 
     }
 
-    std::cout << "radar_count: " << radar_count << std::endl;
-    std::cout << "lidar_count: " << lidar_count << std::endl;
+    // std::cout << "radar_count: " << radar_count << std::endl;
+    // std::cout << "lidar_count: " << lidar_count << std::endl;
 
     // 关闭输入和输出的bag文件
     bag1.close();

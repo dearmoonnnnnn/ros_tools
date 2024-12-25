@@ -1,6 +1,9 @@
 <launch>
 
-<node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen"/>
-<node pkg="rosbag_tools" name="bag_merging" type="bag_merging"  output="screen"/>"
+<node pkg="rosbag_tools" name="bag_merging" type="bag_merging"  output="screen">
+    <param name="input_bag1" value="/home/dearmoon/datasets/NWU/日雪不颠簸高速/enhancing_v2/21l.bag"/>
+    <param name="input_bag2" value="/home/dearmoon/datasets/NWU/日雪不颠簸高速/enhancing_v2/CustomMsg.bag"/>
+    <param name="output_bag" value="/home/dearmoon/datasets/NWU/日雪不颠簸高速/enhancing_v2/r3live_input.bag"/>
+</node>
 
 </launch>
