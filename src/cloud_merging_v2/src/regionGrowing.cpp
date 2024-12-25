@@ -26,7 +26,7 @@ cv::Mat livox_to_Radar = (cv::Mat_<double>(4, 4) <<
 
 
 // 参数设置
-const float radar_to_lidar_distance = 4.0;  // 激光种子点与毫米波点的最大距离 
+const float radar_to_lidar_distance = 1.0;  // 激光种子点与毫米波点的最大距离 
 const float max_distance = 1.0;             // 邻域搜索的最大距离
 const float max_intensity_diff = 10.0;      // 强度差阈值
 
@@ -34,10 +34,10 @@ class RegionGrowingNode {
 public:
     RegionGrowingNode() : nh_("~"){
         // 初始化订阅和发布
-        sub_millimeter_cloud_.subscribe(nh_, "/ars548_process/detectioin_PointCloud2", 1);
-        sub_lidar_cloud_.subscribe(nh_, "/livox/lidar_PointCloud2", 1);
+        sub_millimeter_cloud_.subscribe(nh_, "/ars548_process/detectioin_PointCloud2", 1000);
+        sub_lidar_cloud_.subscribe(nh_, "/livox/lidar_PointCloud2", 1000);
         
-        sync_.reset(new Sync(SyncPolicy(10), sub_millimeter_cloud_, sub_lidar_cloud_));
+        sync_.reset(new Sync(SyncPolicy(2000), sub_millimeter_cloud_, sub_lidar_cloud_));
         sync_->registerCallback(boost::bind(&RegionGrowingNode::processClouds, this, _1, _2));
 
         pub_result_cloud_ = nh_.advertise<sensor_msgs::PointCloud2>("/region_growing_cloud", 1);
@@ -50,6 +50,7 @@ public:
 
     ~RegionGrowingNode(){
         bag_.close();
+        ROS_INFO("Total msg number is %d", msg_count);
     }
 
 private:
@@ -63,9 +64,12 @@ private:
         sensor_msgs::PointCloud2, sensor_msgs::PointCloud2> SyncPolicy;
     typedef message_filters::Synchronizer<SyncPolicy> Sync;
     std::shared_ptr<Sync> sync_;
+    int msg_count = 0;
 
     void processClouds(const sensor_msgs::PointCloud2::ConstPtr& millimeter_msg,
                        const sensor_msgs::PointCloud2::ConstPtr& lidar_msg) {
+        ROS_INFO("Current msg number is %d", msg_count++);
+        
         // 转换点云格式
         pcl::PointCloud<pcl::PointXYZI>::Ptr millimeter_cloud(new pcl::PointCloud<pcl::PointXYZI>());
         pcl::PointCloud<pcl::PointXYZI>::Ptr lidar_cloud(new pcl::PointCloud<pcl::PointXYZI>());
@@ -135,7 +139,7 @@ private:
         bag_.write("/RegionGrowing", output.header.stamp, output);
         // pub_result_cloud_.publish(output);
 
-        ROS_INFO("Region growing completed!");
+        // ROS_INFO("Region growing completed!");
     }
 
     bool canGrow(const pcl::PointXYZI& seed, const pcl::PointXYZI& neighbor, bool is_initial_search = false) {
@@ -168,7 +172,6 @@ private:
         lidar_point.z = lidar_point_mat.at<double>(2, 0);
         lidar_point.intensity = radar_point.intensity;  // 保留强度信息
     }
-
 
 };
 

@@ -71,8 +71,6 @@ int main(int argc, char** argv)
     //     }
     // }
 
-    
-
     // 保持节点活动
     ros::spin();
 

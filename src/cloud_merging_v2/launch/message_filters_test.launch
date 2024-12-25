@@ -9,7 +9,7 @@
 
 <arg name="scene" default="$(arg scene_0)"/>
 
-<node name="regionGrowing" pkg="cloud_merging_v2" type="regionGrowing" output="screen">
+<node name="message_filters_test" pkg="cloud_merging_v2" type="message_filters_test" output="screen">
     <param name="outputFile" value="$(arg path)$(arg scene)/enhancing_v2/regionGrowingResult.bag"/>
 </node>
 

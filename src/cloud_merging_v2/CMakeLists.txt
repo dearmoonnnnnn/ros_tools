@@ -212,10 +212,15 @@ include_directories(
 # endif()
 
 add_executable(regionGrowing src/regionGrowing.cpp)
+add_executable(message_filters_test src/message_filters_test.cpp)
 
 target_link_libraries(regionGrowing
   ${catkin_LIBRARIES}
   ${OpenCV_LIBRARIES}
+)
+
+target_link_libraries(message_filters_test
+  ${catkin_LIBRARIES}
 )
 
 ## Add folders to be run by python nosetests
