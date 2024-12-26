@@ -12,7 +12,6 @@
  *  将时间同步后的两种数据写入一个bag包中
  */
 
-
 // 从 ROS bag 文件中读取数据
 // rosbag::Bag input_bag("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/radar_lidar_input.bag", rosbag::bagmode::Read);
 rosbag::Bag output_bag;

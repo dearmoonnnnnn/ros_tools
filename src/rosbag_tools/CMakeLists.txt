@@ -149,6 +149,7 @@ add_executable(bag_merging src/bag_merging.cpp)
 add_executable(stringMsgSender src/stringMsgSender.cpp)
 add_executable(calibration_displayer src/calibration_displayer.cpp)
 add_executable(pc2ToCustomMsg src/pc2ToCustomMsg.cpp)
+add_executable(CustomMsgFilling src/CustomMsgFilling.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -190,6 +191,10 @@ target_link_libraries(calibration_displayer
 )
 
 target_link_libraries(pc2ToCustomMsg
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(CustomMsgFilling
   ${catkin_LIBRARIES}
 )
 

@@ -147,7 +147,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/cloud_merging_node.cpp)
-add_executable(systime_cloud_merging src/systime_cloud_merging.cpp)
+add_executable(time_synchronization src/time_synchronization.cpp)
 add_executable(toPointCloud2 src/toPointCloud2.cpp)
 add_executable(cloud_merging src/cloud_merging.cpp)
 
@@ -170,7 +170,7 @@ add_executable(PointCloud2_Parser src/PointCloud2_Parser.cpp)
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-target_link_libraries(systime_cloud_merging
+target_link_libraries(time_synchronization
   ${catkin_LIBRARIES}
 )
 

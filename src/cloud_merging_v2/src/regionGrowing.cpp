@@ -108,6 +108,7 @@ private:
                 if (!processed[idx] && canGrow(seed_point, lidar_cloud->points[idx], true)) {
                     seed_queue.push(idx);
                 }
+                break;  // 只要最近的第一个雷达点
             }
 
             // 区域生长
