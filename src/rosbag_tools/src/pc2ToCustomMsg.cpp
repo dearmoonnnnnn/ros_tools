@@ -63,6 +63,11 @@ int main(int argc, char **argv) {
     rosbag::Bag bag;
     bag.open(bag_file, rosbag::bagmode::Write);
 
+    ros::Duration total_time;
+    int msg_count = 0;    
+
+    ros::Time start_time = ros::Time::now();
+
     // 订阅 PointCloud2 消息
     ros::Subscriber sub = nh.subscribe<sensor_msgs::PointCloud2>(
         "/RegionGrowing", 10,
@@ -74,17 +79,23 @@ int main(int argc, char **argv) {
 
             // 写入 Bag 文件，时间戳使用输入消息的时间戳
             bag.write("/livox/lidar", msg->header.stamp, custom_msg);
-            ROS_INFO("Written CustomMsg with %u points to bag at time %u.%u", 
-                     custom_msg.point_num, 
-                     msg->header.stamp.sec, 
-                     msg->header.stamp.nsec);
+
+            ros::Duration total_time = ros::Time::now() - start_time;
+
+            ROS_INFO("Written the %d CustomMsg with %u points to bag, total propressing time: %f seconds", 
+                     msg_count++,
+                     custom_msg.point_num,
+                     total_time.toSec());
         });
 
-    // 等待 ROS 运行
-    ros::spin();
+    ros::Rate rate(10);  // 设置循环频率
+    while (ros::ok()) {
+        ros::spinOnce();  // 处理回调队列
+        rate.sleep();
+    }
 
     // 关闭 Bag 文件
-    bag.close();
+    bag.close();    
 
     return 0;
 }

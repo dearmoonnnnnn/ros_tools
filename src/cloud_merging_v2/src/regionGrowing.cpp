@@ -33,11 +33,12 @@ const float max_intensity_diff = 10.0;      // 强度差阈值
 class RegionGrowingNode {
 public:
     RegionGrowingNode() : nh_("~"){
+        start_time = ros::Time::now();
         // 初始化订阅和发布
-        sub_millimeter_cloud_.subscribe(nh_, "/ars548_process/detectioin_PointCloud2", 1000);
-        sub_lidar_cloud_.subscribe(nh_, "/livox/lidar_PointCloud2", 1000);
+        sub_millimeter_cloud_.subscribe(nh_, "/ars548_process/detectioin_PointCloud2", 4000);
+        sub_lidar_cloud_.subscribe(nh_, "/livox/lidar_PointCloud2", 4000);
         
-        sync_.reset(new Sync(SyncPolicy(2000), sub_millimeter_cloud_, sub_lidar_cloud_));
+        sync_.reset(new Sync(SyncPolicy(4000), sub_millimeter_cloud_, sub_lidar_cloud_));
         sync_->registerCallback(boost::bind(&RegionGrowingNode::processClouds, this, _1, _2));
 
         pub_result_cloud_ = nh_.advertise<sensor_msgs::PointCloud2>("/region_growing_cloud", 1);
@@ -46,6 +47,7 @@ public:
         // std::cout << "outputFile: " << outputFile << std::endl;
 
         bag_.open(outputFile, rosbag::bagmode::Write);
+
     }
 
     ~RegionGrowingNode(){
@@ -65,11 +67,10 @@ private:
     typedef message_filters::Synchronizer<SyncPolicy> Sync;
     std::shared_ptr<Sync> sync_;
     int msg_count = 0;
-
+    ros::Duration total_time_;  // 累积的总处理时间
+    ros::Time start_time;
     void processClouds(const sensor_msgs::PointCloud2::ConstPtr& millimeter_msg,
                        const sensor_msgs::PointCloud2::ConstPtr& lidar_msg) {
-        ROS_INFO("Current msg number is %d", msg_count++);
-        
         // 转换点云格式
         pcl::PointCloud<pcl::PointXYZI>::Ptr millimeter_cloud(new pcl::PointCloud<pcl::PointXYZI>());
         pcl::PointCloud<pcl::PointXYZI>::Ptr lidar_cloud(new pcl::PointCloud<pcl::PointXYZI>());
@@ -140,6 +141,13 @@ private:
         // pub_result_cloud_.publish(output);
 
         // ROS_INFO("Region growing completed!");
+
+
+        // 计算并累计处理时间
+        total_time_ = ros::Time::now() - start_time;
+        
+        ROS_INFO("Processed %d msgs, total processing time: %f seconds", msg_count++, total_time_.toSec());        
+        
     }
 
     bool canGrow(const pcl::PointXYZI& seed, const pcl::PointXYZI& neighbor, bool is_initial_search = false) {

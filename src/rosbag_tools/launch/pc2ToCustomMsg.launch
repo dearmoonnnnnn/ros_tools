@@ -1,5 +1,5 @@
 <launch>
-    <param name="use_sim_time" value="true"/>;
+    <!-- <param name="use_sim_time" value="true"/>; -->
 
     <arg name="path" default="/home/dearmoon/datasets/NWU/"/>
     <arg name="scene_0" default="日晴不颠簸低速3"/>
