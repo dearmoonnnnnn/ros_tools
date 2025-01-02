@@ -8,12 +8,12 @@
     <arg name="scene" default="$(arg scene_1)"/>
 
     <node name="pc2ToCustomMsg" type="pc2ToCustomMsg" pkg="rosbag_tools" output="screen">
-        <param name="outputFile" value="$(arg path)$(arg scene)/enhancing_v2/CustomMsg.bag"/>
+        <param name="outputFile" value="$(arg path)$(arg scene)/enhancing_v2/3/CustomMsg.bag"/>
     </node>
 
     <node name="player" pkg="rosbag" type="play" 
         args="--clock
-        $(arg path)$(arg scene)/enhancing_v2/regionGrowingResult.bag"
+        $(arg path)$(arg scene)/enhancing_v2/3/regionGrowingResult.bag"
         >
     </node>
 

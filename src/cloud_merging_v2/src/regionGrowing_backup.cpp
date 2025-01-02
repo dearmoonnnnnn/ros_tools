@@ -26,9 +26,9 @@ cv::Mat livox_to_Radar = (cv::Mat_<double>(4, 4) <<
 
 
 // 参数设置
-const float radar_to_lidar_distance = 0.5;  // 激光种子点与毫米波点的最大距离 
-const float max_distance = 0.5;             // 邻域搜索的最大距离
-const float max_intensity_diff = 1000000.0;      // 强度差阈值
+const float radar_to_lidar_distance = 1.5;  // 激光种子点与毫米波点的最大距离 
+const float max_distance = 1.0;             // 邻域搜索的最大距离
+const float max_intensity_diff = 3.0;      // 强度差阈值
 
 class RegionGrowingNode {
 public:
@@ -104,7 +104,7 @@ private:
 
             // 将符合条件的点加入种子队列
             for (int idx : neighbor_indices) {
-                if (!processed[idx] && canGrow(seed_point, lidar_cloud->points[idx], true)) {
+                if (!processed[idx] && canGrow(seed_point, lidar_cloud->points[idx], true) && lidar_cloud->points[idx].intensity > 20) {
                     seed_queue.push(idx);
                 }
                 break;  // 只要最近的第一个雷达点
@@ -134,7 +134,7 @@ private:
             }
 
             // 检查区域大小，如果小于 20，则认为是噪声，丢弃该区域
-            if (region_size >= 1) {
+            if (region_size >= 40) {
                 result_cloud->points.insert(result_cloud->points.end(), region_points.begin(), region_points.end());
             }
         }

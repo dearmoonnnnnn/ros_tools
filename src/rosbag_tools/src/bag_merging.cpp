@@ -49,10 +49,10 @@ int main(int argc, char** argv) {
     // rosbag::View view2(bag2, rosbag::TopicQuery("/b1") || rosbag::TopicQuery("/b2"));
 
     std::vector<std::string> topics_bag1 = {"/livox/imu", "/color/compressed"};
-    std::vector<std::string> topics_bag2 = {"/livox/lidar"};
+    std::vector<std::string> topics_bag2 = {"/FilledRegionGrowingCloud"};
 
     rosbag::View view1(bag1, rosbag::TopicQuery(topics_bag1));
-    rosbag::View view2(bag2, rosbag::TopicQuery("/livox/lidar"));
+    rosbag::View view2(bag2, rosbag::TopicQuery(topics_bag2));
 
     // 循环读取输入bag文件中的消息并写入输出bag文件
     for (const rosbag::MessageInstance& msg : view1) {
@@ -63,7 +63,8 @@ int main(int argc, char** argv) {
     for (const rosbag::MessageInstance& msg : view2) {
         // std::cout << " msg.getTime(): " << msg.getTime() << std::endl;
         lidar_count++;
-        output_bag.write(msg.getTopic(), msg.getTime(), msg);
+        output_bag.write("/livox/lidar", msg.getTime(), msg);
+        // output_bag.write(msg.getTopic(), msg.getTime(), msg);
 
 
         // 检查时间戳顺序是否正确
