@@ -4,7 +4,7 @@
     <arg name="scene" default="日雪不颠簸高速/"/>
 
     <node name="CustomMsgFillsing" type="CustomMsgFilling" pkg="rosbag_tools" output="screen">
-        <param name="outputPath" value="$(arg path)$(arg scene)enhancing_v2/3/FilledCustomMsg.bag"/>
+        <param name="outputPath" value="$(arg path)$(arg scene)enhancing_v2/0/FilledCustomMsg.bag"/>
     </node>
 
     <node name="player_1" pkg="rosbag" type="play"
@@ -15,7 +15,7 @@
 
     <node name="player_2" pkg="rosbag" type="play"
         args="--clock
-        $(arg path)$(arg scene)enhancing_v2/3/CustomMsg.bag
+        $(arg path)$(arg scene)enhancing_v2/0/CustomMsg.bag
         --topic /livox/lidar">
         <remap from="livox/lidar" to="/RegionGrowing/CustomMsg"/>
     </node>

@@ -70,7 +70,7 @@ int main(int argc, char **argv) {
 
     // 订阅 PointCloud2 消息
     ros::Subscriber sub = nh.subscribe<sensor_msgs::PointCloud2>(
-        "/RegionGrowing", 10,
+        "/RegionGrowing", 4000,
         [&](const sensor_msgs::PointCloud2::ConstPtr &msg) {
             // 转换为 CustomMsg
             livox_ros_driver::CustomMsg custom_msg;
