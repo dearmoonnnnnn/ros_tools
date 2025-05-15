@@ -4,8 +4,10 @@
 
 <node pkg="rosbag_tools" name="bag_merging" type="bag_merging"  output="screen">
     <param name="input_bag1" value="$(arg path)/21l.bag"/>
-    <param name="input_bag2" value="$(arg path)/3/FilledCustomMsg.bag"/>
-    <param name="output_bag" value="$(arg path)/3/r3live_input.bag"/>
+    <!-- <param name="input_bag2" value="$(arg path)/3/FilledCustomMsg.bag"/> -->
+    <param name="input_bag2" value="/media/dearmoon/Elements/test/FilledCustomMsg.bag"/>
+    <param name="output_bag" value="/media/dearmoon/Elements/r3live_input.bag"/>
+    <!-- <param name="output_bag" value="$(arg path)/3/r3live_input.bag"/> -->
 </node>
 
 </launch>

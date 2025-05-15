@@ -40,10 +40,10 @@ int main(int argc, char** argv)
     ros::init(argc, argv, "time_sync_example_cpp");
     ros::NodeHandle nh;
 
-    output_bag.open("/home/dearmoon/datasets/NWU/夜雪不颠簸高速/enhancing/test.bag", rosbag::bagmode::Write);
+    output_bag.open("/home/dearmoon/datasets/NWU/夜雪不颠簸高速/enhancing/step1.bag", rosbag::bagmode::Write);
    
     // 定义 radar 和 PointCloud2 的订阅者
-    message_filters::Subscriber<sensor_msgs::PointCloud> radar_sub(nh, "/ars548_process/detection_point_cloud", 10);
+    message_filters::Subscriber<sensor_msgs::PointCloud> radar_sub(nh, "/ars548_detectionlist", 10);
     message_filters::Subscriber<rosbag_tools::CustomMsg> lidar_sub(nh, "/livox/lidar", 10);
 
     // 定义时间同步策略，传入参数

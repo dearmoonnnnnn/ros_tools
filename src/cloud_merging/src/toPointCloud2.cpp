@@ -153,7 +153,10 @@ void pointcloudCallback(const sensor_msgs::PointCloudConstPtr& msg) {
     }
 
     // 将转换后的消息写入新的 ROS bag 文件
-    output_bag.write("/ars548_process/detection_PointCloud2", pcl2_msg.header.stamp, pcl2_msg);
+    // output_bag.write("/ars548_process/detection_PointCloud2", pcl2_msg.header.stamp, pcl2_msg);
+
+    // 若要插值，使用上面的话题
+    output_bag.write("/filtered_points", pcl2_msg.header.stamp, pcl2_msg);
     // pcl2_pub.publish(pcl2_msg);
 
     // ROS_INFO("radar timestamp: %f", pcl2_msg->header.stamp.toSec());
@@ -193,8 +196,9 @@ void customMsgCallback(const rosbag_tools::CustomMsgConstPtr& msg) {
     // custom_pcl2_pub.publish(custom_pcl2_msg);
 
     // 将转换后的消息写入新的 ROS bag 文件
-    output_bag.write("/livox/lidar_PointCloud2", custom_pcl2_msg.header.stamp, custom_pcl2_msg);
-    
+    output_bag.write("/livox/lidar", custom_pcl2_msg.header.stamp, custom_pcl2_msg);
+
+
     ROS_INFO("lidar timestamp: %f", custom_pcl2_msg.header.stamp.toSec());
     std::cout << "lidar timestamp: " << custom_pcl2_msg.header.stamp << std::endl;
 }
@@ -207,11 +211,11 @@ int main(int argc, char** argv) {
 
 
     // 打开新的 ROS bag 文件
-    output_bag.open("/home/dearmoon/datasets/NWU/日雪不颠簸高速/one_msg/lidar_input_front_pc2.bag", rosbag::bagmode::Write);
+    output_bag.open("/home/dearmoon/datasets/NWU/夜雪不颠簸高速/radar_input.bag", rosbag::bagmode::Write);
     // output_bag.open("/home/dearmoon/datasets/NWU/日晴不颠簸低速3/enhancing/one_msg_test_step2.bag", rosbag::bagmode::Write);
 
     // 订阅 sensor_msgs::PointCloud 和 livox_ros_driver::CustomMsg 话题，并设置回调函数
-    ros::Subscriber pointcloud_sub = nh.subscribe("/ars548_process/detection_point_cloud", 10, pointcloudCallback);
+    ros::Subscriber pointcloud_sub = nh.subscribe("/ars548_detectionlist", 10, pointcloudCallback);
     ros::Subscriber custom_sub = nh.subscribe("/livox/lidar", 10, customMsgCallback);
 
     ros::spin();

@@ -21,7 +21,6 @@
  * cloud_merging.cpp
  * 将同一个bag文件中的两个不同的点云数据进行合并
  * 
- * TODO: 配置文件，编译调试
  */
 
 ros::Publisher merged_pub;
